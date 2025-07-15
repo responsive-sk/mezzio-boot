@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sk" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<?= isset($description) ? $this->escapeHtml($description) : 'TailwindCSS + Alpine.js Demo - Mezzio Application' ?>">
+    <meta name="keywords" content="TailwindCSS, Alpine.js, utility-first CSS, reactive components, Mezzio">
+    <meta name="author" content="Mezzio Minimal App">
+    <title><?= isset($title) ? $this->escapeHtml($title) : 'TailwindCSS + Alpine.js Demo - Mezzio Application' ?></title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Theme CSS -->
+    <?php if (isset($cssUrl)): ?>
+        <link href="<?= $cssUrl ?>" rel="stylesheet">
+    <?php endif; ?>
+    
+    <style>
+        /* Alpine.js cloak */
+        [x-cloak] { display: none !important; }
+        
+        /* Dark mode variables */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+            color: rgb(243 244 246);
+        }
+        
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Smooth transitions for theme changes */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Custom scrollbar for dark mode */
+        .dark::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .dark::-webkit-scrollbar-track {
+            background: #374151;
+        }
+        
+        .dark::-webkit-scrollbar-thumb {
+            background: #6b7280;
+            border-radius: 4px;
+        }
+        
+        .dark::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <?= $this->content ?>
+    
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between light and dark theme">
+        <span class="theme-toggle-icon">🌙</span>
+    </button>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Theme JS -->
+    <?php if (isset($jsUrl)): ?>
+        <script src="<?= $jsUrl ?>"></script>
+    <?php endif; ?>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        // Dark mode functionality for TailwindCSS
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const themeIcon = document.querySelector('.theme-toggle-icon');
+
+        // Only initialize theme functionality if elements exist
+        if (themeToggle && themeIcon) {
+            // Check for saved theme preference or default to light mode
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            updateTheme(currentTheme);
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                updateTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            function updateTheme(theme) {
+                if (theme === 'dark') {
+                    html.classList.add('dark');
+                    html.classList.remove('light');
+                    themeIcon.textContent = '☀️';
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                    themeIcon.textContent = '🌙';
+                }
+            }
+
+            // Respect system preference
+            if (!localStorage.getItem('theme')) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    updateTheme('dark');
+                }
+            }
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    updateTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

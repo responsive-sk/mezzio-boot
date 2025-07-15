@@ -46,6 +46,8 @@ class ConfigProvider
                 GetIndexViewHandler::class => GetIndexViewHandlerFactory::class,
                 PathsExampleHandler::class => PathsExampleHandlerFactory::class,
                 Paths::class               => PathsFactory::class,
+                \Light\App\Handler\BootstrapDemoHandler::class => \Light\App\Factory\BootstrapDemoHandlerFactory::class,
+                \Light\App\Handler\MainDemoHandler::class => \Light\App\Factory\MainDemoHandlerFactory::class,
             ],
         ];
     }

@@ -50,8 +50,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $url('app::paths-example') ?>">Paths Example</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="<?= $url('app::index') ?>">Disabled</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Themes</a>
+                            <div class="dropdown-menu" aria-labelledby="themeDropdown">
+                                <a class="dropdown-item" href="<?= $url('app::bootstrap-demo') ?>">Bootstrap Demo</a>
+                                <a class="dropdown-item" href="<?= $url('app::main-demo') ?>">TailwindCSS Demo</a>
+                            </div>
                         </li>
                     </ul>
 

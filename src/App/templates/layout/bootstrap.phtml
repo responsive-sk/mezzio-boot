@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="sk" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<?= isset($description) ? $this->escapeHtml($description) : 'Bootstrap 5.3 Theme Demo - Mezzio Application' ?>">
+    <meta name="keywords" content="Bootstrap, Mezzio, responsive design, CSS framework, components">
+    <meta name="author" content="Mezzio Minimal App">
+    <title><?= isset($title) ? $this->escapeHtml($title) : 'Bootstrap Theme Demo - Mezzio Application' ?></title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Theme CSS -->
+    <?php if (isset($cssUrl)): ?>
+        <link href="<?= $cssUrl ?>" rel="stylesheet">
+    <?php endif; ?>
+    
+    <style>
+        /* Improved contrast for accessibility */
+        .text-muted { color: #495057 !important; }
+        .text-secondary { color: #495057 !important; }
+        
+        /* Hero section styling */
+        .hero-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Card hover effects */
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Dark mode support */
+        [data-bs-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        [data-bs-theme="dark"] .card {
+            background-color: var(--bs-dark);
+            border-color: var(--bs-gray-700);
+        }
+        
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <?= $this->content ?>
+    
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between light and dark theme">
+        <span class="theme-toggle-icon">🌙</span>
+    </button>
+    
+    <!-- Bootstrap JS -->
+    <?php if (isset($jsUrl)): ?>
+        <script src="<?= $jsUrl ?>"></script>
+    <?php endif; ?>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+        // Dark mode functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const themeIcon = document.querySelector('.theme-toggle-icon');
+
+        // Only initialize theme functionality if elements exist
+        if (themeToggle && themeIcon) {
+            // Check for saved theme preference or default to light mode
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-bs-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                html.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            function updateThemeIcon(theme) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+
+            // Respect system preference
+            if (!localStorage.getItem('theme')) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    html.setAttribute('data-bs-theme', 'dark');
+                    updateThemeIcon('dark');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
