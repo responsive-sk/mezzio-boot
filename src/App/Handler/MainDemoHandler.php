@@ -26,9 +26,9 @@ class MainDemoHandler implements RequestHandlerInterface
             'description' => 'Modern utility-first CSS framework with reactive components',
         ];
 
-        // Vite compiled assets
-        $cssUrl = '/themes/main/assets/main-DvPNKpg3.css';
-        $jsUrl = '/themes/main/assets/main-BVkJOiu1.js';
+        // Vite compiled assets (no hashes for easier maintenance)
+        $cssUrl = '/themes/main/assets/main.css';
+        $jsUrl = '/themes/main/assets/main.js';
 
         $html = $this->template->render('app::main-demo', [
             'themeInfo' => $themeInfo,

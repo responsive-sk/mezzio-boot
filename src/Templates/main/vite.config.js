@@ -12,15 +12,9 @@ export default defineConfig(({ mode }) => ({
         main: path.resolve(__dirname, 'src', 'main.js'),
       },
       output: {
-        entryFileNames: mode === 'production'
-          ? 'assets/[name]-[hash].js'
-          : 'assets/[name].js',
-        chunkFileNames: mode === 'production'
-          ? 'assets/[name]-[hash].js'
-          : 'assets/[name].js',
-        assetFileNames: mode === 'production'
-          ? 'assets/[name]-[hash].[ext]'
-          : 'assets/[name].[ext]'
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
     }
   },

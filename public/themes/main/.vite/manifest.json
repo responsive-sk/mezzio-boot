@@ -1,33 +1,33 @@
 {
   "images/digital-marketing.jpg": {
-    "file": "assets/digital-marketing-CMbb9gTa.jpg",
+    "file": "assets/digital-marketing.jpg",
     "src": "images/digital-marketing.jpg"
   },
   "images/javascript.jpg": {
-    "file": "assets/javascript-BX3l_YLm.jpg",
+    "file": "assets/javascript.jpg",
     "src": "images/javascript.jpg"
   },
   "images/nav/logo.svg": {
-    "file": "assets/logo-CoNUu8jz.svg",
+    "file": "assets/logo.svg",
     "src": "images/nav/logo.svg"
   },
   "images/php82.jpg": {
-    "file": "assets/php82-CIjiZIIM.jpg",
+    "file": "assets/php82.jpg",
     "src": "images/php82.jpg"
   },
   "main.js": {
-    "file": "assets/main-A67U7hHX.js",
+    "file": "assets/main.js",
     "name": "main",
     "src": "main.js",
     "isEntry": true,
     "css": [
-      "assets/main-D-jYNHe5.css"
+      "assets/main.css"
     ],
     "assets": [
-      "assets/php82-CIjiZIIM.jpg",
-      "assets/javascript-BX3l_YLm.jpg",
-      "assets/digital-marketing-CMbb9gTa.jpg",
-      "assets/logo-CoNUu8jz.svg"
+      "assets/php82.jpg",
+      "assets/javascript.jpg",
+      "assets/digital-marketing.jpg",
+      "assets/logo.svg"
     ]
   }
 }

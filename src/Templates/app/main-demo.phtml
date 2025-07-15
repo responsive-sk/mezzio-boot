@@ -1,8 +1,10 @@
 <?php
-$layout('layout::default', [
+$layout('layout::tailwind', [
     'title' => 'TailwindCSS + Alpine.js Demo - Mezzio Light',
     'description' => 'TailwindCSS and Alpine.js theme demonstration for Mezzio Light application.',
-    'body_class' => 'tailwind-demo'
+    'body_class' => 'tailwind-demo',
+    'cssUrl' => $cssUrl ?? null,
+    'jsUrl' => $jsUrl ?? null,
 ]);
 ?>
 

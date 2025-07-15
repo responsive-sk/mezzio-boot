@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?= isset($description) ? $this->escapeHtml($description) : 'Bootstrap 5.3 Theme Demo - Mezzio Application' ?>">
+    <meta name="description" content="<?= $e($description ?? 'Bootstrap 5.3 Theme Demo - Mezzio Application') ?>">
     <meta name="keywords" content="Bootstrap, Mezzio, responsive design, CSS framework, components">
     <meta name="author" content="Mezzio Minimal App">
-    <title><?= isset($title) ? $this->escapeHtml($title) : 'Bootstrap Theme Demo - Mezzio Application' ?></title>
+    <title><?= $e($title ?? 'Bootstrap Theme Demo - Mezzio Application') ?></title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
     <!-- Bootstrap Icons -->
@@ -75,7 +75,7 @@
     </style>
 </head>
 <body>
-    <?= $this->content ?>
+    <?= $content ?>
     
     <!-- Theme Toggle Button -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between light and dark theme">

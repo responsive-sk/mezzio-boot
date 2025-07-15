@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="<?= $e($description ?? 'Mezzio Light Application') ?>"/>
+    <meta name="author" content="<?= $e($author ?? 'Dotkernel Team') ?>"/>
+    <meta name="generator" content="Mezzio"/>
+    <meta name="theme-color" content="#ffffff"/>
+
+    <title><?= $e($title ?? 'Mezzio Light Application') ?></title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= $asset('images/app/favicon/favicon-32x32.png') ?>"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= $asset('images/app/favicon/favicon-16x16.png') ?>"/>
+    <link rel="manifest" href="<?= $asset('images/app/favicon/site.webmanifest') ?>"/>
+    <link rel="mask-icon" href="<?= $asset('images/app/favicon/safari-pinned-tab.svg') ?>" color="#5bbad5"/>
+    <meta name="msapplication-TileColor" content="#da532c"/>
+
+    <!-- TailwindCSS -->
+    <link rel="stylesheet" href="<?= $e($cssUrl) ?>"/>
+</head>
+
+<body class="h-full bg-gray-50 <?= $body_class ?? '' ?>">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="<?= $url('app::index') ?>" class="flex-shrink-0">
+                            <img class="h-8 w-auto" src="/images/app/logo.svg" alt="responsive.sk"/>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="<?= $url('app::index') ?>" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                            Home
+                        </a>
+                        <a href="<?= $url('app::bootstrap-demo') ?>" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                            Bootstrap Demo
+                        </a>
+                        <a href="<?= $url('app::main-demo') ?>" class="text-blue-600 px-3 py-2 text-sm font-medium">
+                            TailwindCSS Demo
+                        </a>
+                        
+                        <!-- Pages Dropdown -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors">
+                                Pages
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                <a href="<?= $url('page::about') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
+                                <a href="<?= $url('page::who-we-are') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Who We Are</a>
+                            </div>
+                        </div>
+                        
+                        <a href="https://github.com/dotkernel/light/" target="_blank" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                            GitHub
+                        </a>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden flex items-center">
+                        <button x-data="{ open: false }" @click="open = !open" class="text-gray-900 hover:text-blue-600 p-2">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="pt-16">
+            <?= $content ?>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 mt-16">
+            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-600">&copy; <?= date('Y') ?> DotKernel Light. Built with TailwindCSS + Alpine.js.</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="https://docs.dotkernel.org/" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            Documentation
+                        </a>
+                        <a href="https://github.com/dotkernel/light" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TailwindCSS + Alpine.js -->
+    <script src="<?= $e($jsUrl) ?>"></script>
+</body>
+</html>

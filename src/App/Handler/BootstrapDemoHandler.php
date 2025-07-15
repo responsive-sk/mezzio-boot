@@ -26,9 +26,9 @@ class BootstrapDemoHandler implements RequestHandlerInterface
             'description' => 'Bootstrap CSS framework demo',
         ];
 
-        // Vite compiled assets
-        $cssUrl = '/themes/bootstrap/assets/main-D30XL3Ms.css';
-        $jsUrl = '/themes/bootstrap/assets/main-Df2FmC7f.js';
+        // Vite compiled assets (no hashes for easier maintenance)
+        $cssUrl = '/themes/bootstrap/assets/main.css';
+        $jsUrl = '/themes/bootstrap/assets/main.js';
 
         $html = $this->template->render('app::bootstrap-demo', [
             'themeInfo' => $themeInfo,
