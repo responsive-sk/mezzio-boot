@@ -50,7 +50,7 @@
     "autoload": {
         "psr-4": {
             "Light\\Core\\": "src/Core/src/",
-            "Light\\App\\": "src/App/src/",
+            "Light\\App\\": "src/App/",
             "Light\\Page\\": "src/Page/src/"
         }
     },

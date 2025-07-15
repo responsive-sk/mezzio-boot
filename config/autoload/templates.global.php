@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 return [
     'templates' => [
-        'extension' => 'html.twig',
-    ],
-    'twig'      => [
-        'assets_url'      => '/',
-        'assets_version'  => null,
-        'autoescape'      => 'html',
-        'auto_reload'     => true,
-        'cache_dir'       => 'var/cache/twig',
-        'extensions'      => [],
-        'globals'         => [],
-        'optimizations'   => -1,
-        'runtime_loaders' => [],
-        'timezone'        => 'UTC',
+        'extension' => 'phtml',
+        'paths' => [
+            // App Templates
+            'app' => ['src/Templates/app'],
+
+            // Layout Templates
+            'layout' => ['src/Templates/layout'],
+
+            // Error Templates
+            'error' => ['src/Templates/error'],
+
+            // Partial Templates
+            'partial' => ['src/Templates/partial'],
+
+            // Page Templates
+            'page' => ['src/Page/Templates/page'],
+        ],
     ],
 ];

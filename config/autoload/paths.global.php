@@ -26,13 +26,13 @@ return [
             'tmp'   => 'var/tmp', // CHANGED: moved to var
         ],
 
-        // Template paths remain the same
+        // Template paths - updated for simplified structure
         'templates' => [
-            'app'     => 'src/App/templates/app',
-            'error'   => 'src/App/templates/error',
-            'layout'  => 'src/App/templates/layout',
-            'partial' => 'src/App/templates/partial',
-            'page'    => 'src/Page/templates/page',
+            'app'     => 'src/Templates/app',
+            'error'   => 'src/Templates/error',
+            'layout'  => 'src/Templates/layout',
+            'partial' => 'src/Templates/partial',
+            'page'    => 'src/Page/Templates/page',
         ],
 
         // Cache directories - moved to var

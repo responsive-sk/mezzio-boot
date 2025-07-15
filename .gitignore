@@ -57,9 +57,9 @@ build/
 *.tar.gz.sha256
 
 # Theme node_modules and build files
-src/App/templates/themes/*/node_modules/
-src/App/templates/themes/*/dist/
-src/App/templates/themes/*/.vite/
+src/templates/*/node_modules/
+src/templates/*/dist/
+src/templates/*/.vite/
 
 # Log files
 var/logs/*.log
