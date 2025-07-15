@@ -172,7 +172,20 @@ class NativePhpRenderer implements TemplateRendererInterface
      */
     private function initializeTemplatePaths(): void
     {
-        // First try to load from Paths service (v6.0 way)
+        // Load from templates configuration (new way)
+        if (isset($this->config['templates']['paths'])) {
+            /** @var array<string, array<string>> $templatePaths */
+            $templatePaths = $this->config['templates']['paths'];
+
+            foreach ($templatePaths as $namespace => $paths) {
+                foreach ($paths as $path) {
+                    $this->addPath($path, $namespace);
+                }
+            }
+            return; // If we have templates config, use only that
+        }
+
+        // Fallback: try to load from Paths service (v6.0 way)
         $allPaths           = $this->pathsService->all();
         $templateNamespaces = ['layout', 'app', 'error', 'page', 'partial'];
 
