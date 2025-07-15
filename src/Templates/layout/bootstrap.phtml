@@ -74,9 +74,68 @@
         }
     </style>
 </head>
-<body>
-    <?= $content ?>
-    
+
+<body class="app <?= $body_class ?? '' ?>" data-bs-theme="light">
+    <div class="app-wrapper">
+        <!-- Bootstrap Navigation -->
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="<?= $url('app::index') ?>">
+                    <img src="/images/app/logo.svg" width="150" height="30" alt="responsive.sk"/>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                        aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarHeader">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $url('app::index') ?>">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<?= $url('app::bootstrap-demo') ?>">Bootstrap Demo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $url('app::main-demo') ?>">TailwindCSS Demo</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                            <div class="dropdown-menu" aria-labelledby="pageDropdown">
+                                <a class="dropdown-item" href="<?= $url('page::about') ?>">About Us</a>
+                                <a class="dropdown-item" href="<?= $url('page::who-we-are') ?>">Who We Are</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/dotkernel/light/" target="_blank">GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content" style="padding-top: 80px;">
+            <?= $content ?>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer bg-light py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; <?= date('Y') ?> DotKernel Light. Built with Bootstrap 5.3.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="https://docs.dotkernel.org/" target="_blank" class="text-decoration-none">Documentation</a>
+                        <span class="mx-2">|</span>
+                        <a href="https://github.com/dotkernel/light" target="_blank" class="text-decoration-none">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
     <!-- Theme Toggle Button -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between light and dark theme">
         <span class="theme-toggle-icon">🌙</span>

@@ -8,17 +8,53 @@ $layout('layout::tailwind', [
 ]);
 ?>
 
-<div class="page-intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-4">TailwindCSS + Alpine.js Theme</h1>
-                <p class="lead">Modern utility-first CSS framework with reactive JavaScript components</p>
-                <hr class="my-4">
-                <p>This theme demonstrates TailwindCSS utility classes and Alpine.js reactivity in a clean, minimal design.</p>
-                <div class="d-flex gap-3 flex-wrap">
-                    <a href="#components" class="btn btn-primary">View Components</a>
-                    <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+<!-- Hero Section -->
+<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 min-h-[60vh]">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+         style="background-image: url('/themes/main/assets/javascript.jpg')"></div>
+
+    <!-- Content -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <h1 class="text-4xl lg:text-6xl font-bold text-white leading-tight">
+                        TailwindCSS +
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                            Alpine.js
+                        </span>
+                    </h1>
+                    <p class="text-xl text-blue-100 leading-relaxed max-w-2xl">
+                        Experience the power of utility-first CSS combined with reactive JavaScript components.
+                        Build modern, responsive interfaces with minimal code and maximum flexibility.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#components"
+                       class="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-200 shadow-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        View Components
+                    </a>
+                    <a href="/"
+                       class="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+
+            <div class="hidden lg:block">
+                <div class="relative">
+                    <img src="/themes/main/assets/digital-marketing.jpg"
+                         alt="Modern Web Development"
+                         class="rounded-2xl shadow-2xl w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-2xl"></div>
                 </div>
             </div>
         </div>

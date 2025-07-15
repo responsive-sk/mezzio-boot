@@ -8,17 +8,36 @@ $layout('layout::bootstrap', [
 ]);
 ?>
 
-<div class="page-intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-4">Bootstrap 5.3 Theme</h1>
-                <p class="lead">Demonstration of Bootstrap framework integration with Mezzio Light</p>
-                <hr class="my-4">
-                <p>This theme showcases Bootstrap's responsive components, utility classes, and modern design system.</p>
+<!-- Hero Section -->
+<div class="hero-section position-relative overflow-hidden">
+    <div class="hero-background position-absolute w-100 h-100" style="
+        background: linear-gradient(135deg, rgba(13, 110, 253, 0.9) 0%, rgba(0, 86, 179, 0.9) 100%),
+                    url('/themes/main/assets/javascript.jpg') center/cover no-repeat;
+        z-index: -1;
+    "></div>
+    <div class="container py-5">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-8 col-xl-7">
+                <h1 class="display-3 fw-bold text-white mb-4">
+                    Bootstrap 5.3 Theme
+                </h1>
+                <p class="lead text-white-50 mb-4 fs-5">
+                    Experience the power of Bootstrap's responsive components, utility classes, and modern design system
+                    integrated seamlessly with Mezzio Light framework.
+                </p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <a href="#components" class="btn btn-primary">View Components</a>
-                    <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+                    <a href="#components" class="btn btn-light btn-lg px-4 py-2">
+                        <i class="bi bi-grid-3x3-gap me-2"></i>View Components
+                    </a>
+                    <a href="/" class="btn btn-outline-light btn-lg px-4 py-2">
+                        <i class="bi bi-house me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="text-center">
+                    <img src="/themes/main/assets/digital-marketing.jpg" alt="Digital Marketing"
+                         class="img-fluid rounded-3 shadow-lg" style="max-height: 300px; object-fit: cover;">
                 </div>
             </div>
         </div>
