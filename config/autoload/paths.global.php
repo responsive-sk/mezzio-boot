@@ -32,7 +32,7 @@ return [
             'error'   => 'src/Templates/error',
             'layout'  => 'src/Templates/layout',
             'partial' => 'src/Templates/partial',
-            'page'    => 'src/Page/Templates/page',
+            'page'    => 'src/Page/templates/page',
         ],
 
         // Cache directories - moved to var

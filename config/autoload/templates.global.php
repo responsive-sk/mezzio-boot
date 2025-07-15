@@ -19,7 +19,7 @@ return [
             'partial' => ['src/Templates/partial'],
 
             // Page Templates
-            'page' => ['src/Page/Templates/page'],
+            'page' => ['src/Page/templates/page'],
         ],
     ],
 ];
