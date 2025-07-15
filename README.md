@@ -3,6 +3,13 @@
 Dotkernel Light is a PSR-15 compliant application (skeleton) using Mezzio microframework and Laminas components.
 It's designed as a minimal project to generate a simple website, like a presentation site.
 
+**New Features:**
+- 🎨 **Modern Theme System**: Bootstrap 5.3 and TailwindCSS + Alpine.js themes
+- ⚡ **Vite Build System**: Fast development with hot reload and optimized production builds
+- 📱 **Demo Pages**: Interactive theme showcases at `/bootstrap-demo` and `/main-demo`
+- 🔧 **Maximum Code Quality**: PHPStan level 10 and PSR-12 compliance
+- 🏗️ **Simplified Architecture**: Clean src/ structure with enhanced template system
+
 > Check out our [demo](https://light.dotkernel.net/).
 
 ## Documentation
@@ -24,7 +31,8 @@ Documentation is available at: https://docs.dotkernel.org/light-documentation/
 [![Qodana](https://github.com/dotkernel/light/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/dotkernel/light/actions/workflows/qodana_code_quality.yml)
 
 [![PHPStan](https://github.com/dotkernel/light/actions/workflows/static-analysis.yml/badge.svg?branch=1.0)](https://github.com/dotkernel/light/actions/workflows/static-analysis.yml)
-![PHPstan Level](https://img.shields.io/badge/PHPStan-level%208-brightgreen)
+![PHPstan Level](https://img.shields.io/badge/PHPStan-level%20MAX-brightgreen)
+![Code Style](https://img.shields.io/badge/Code%20Style-PSR--12-blue)
 
 ## Installing Dotkernel `light`
 
@@ -135,6 +143,73 @@ We recommend running your applications in WSL:
 - run the application by opening the virtualhost address in your browser
 
 You should see the `Dotkernel light` welcome page.
+
+## Theme System
+
+DotKernel Light includes a modern theme system with two pre-built themes:
+
+### Available Themes
+
+- **Bootstrap 5.3 Theme** (`/bootstrap-demo`): Complete component library with responsive design
+- **TailwindCSS + Alpine.js Theme** (`/main-demo`): Utility-first CSS with reactive JavaScript
+
+### Building Themes
+
+```bash
+# Install dependencies and build Bootstrap theme
+cd src/Templates/bootstrap
+pnpm install
+pnpm run build
+
+# Install dependencies and build TailwindCSS theme
+cd src/Templates/main
+pnpm install
+pnpm run build
+```
+
+### Development Mode
+
+```bash
+# Start development server with hot reload
+cd src/Templates/bootstrap
+pnpm run dev
+
+# Or for TailwindCSS theme
+cd src/Templates/main
+pnpm run dev
+```
+
+### Performance
+
+- **Bootstrap**: 31KB CSS + 24KB JS (gzipped)
+- **TailwindCSS**: 3.5KB CSS + 16KB JS (gzipped)
+- **Vite optimization**: Tree shaking, minification, cache busting
+
+See [Theme System Documentation](docs/theme-system.md) for detailed information.
+
+## Code Quality
+
+DotKernel Light maintains the highest code quality standards:
+
+- **PHPStan Level**: Maximum (10/10) with zero errors
+- **Code Style**: PSR-12 compliance with PHP CS Fixer
+- **Type Safety**: Comprehensive type annotations
+- **Documentation**: Complete PHPDoc coverage
+
+### Running Quality Checks
+
+```bash
+# Static analysis
+vendor/bin/phpstan analyse
+
+# Code style check
+vendor/bin/php-cs-fixer fix --dry-run --diff
+
+# Fix code style
+vendor/bin/php-cs-fixer fix
+```
+
+See [Code Quality Documentation](docs/code-quality.md) for detailed standards.
 
 **NOTE:**
 

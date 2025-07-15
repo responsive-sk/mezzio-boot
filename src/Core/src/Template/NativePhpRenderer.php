@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Light\Core\Template;
 
-use Mezzio\Helper\UrlHelper;
-use Mezzio\Template\TemplatePath;
-use Mezzio\Template\TemplateRendererInterface;
-use ResponsiveSk\Slim4Paths\Paths;
-use RuntimeException;
-
 use function array_merge;
+
+use const ENT_QUOTES;
+use const ENT_SUBSTITUTE;
+
 use function explode;
+
+use const EXTR_SKIP;
+
 use function extract;
 use function file_exists;
 use function htmlspecialchars;
@@ -20,23 +21,32 @@ use function is_object;
 use function is_scalar;
 use function ltrim;
 use function method_exists;
+
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Template\TemplatePath;
+use Mezzio\Template\TemplateRendererInterface;
+
 use function ob_get_clean;
 use function ob_start;
 use function pathinfo;
+
+use const PATHINFO_EXTENSION;
+
 use function preg_match;
 use function realpath;
+
+use ResponsiveSk\Slim4Paths\Paths;
+
 use function rtrim;
+
+use RuntimeException;
+
 use function str_contains;
 use function strpos;
 use function urldecode;
 
-use const ENT_QUOTES;
-use const ENT_SUBSTITUTE;
-use const EXTR_SKIP;
-use const PATHINFO_EXTENSION;
-
 /**
- * Native PHP template renderer implementation
+ * Native PHP template renderer implementation.
  *
  * Implements Mezzio\Template\TemplateRendererInterface using pure PHP templates.
  * Provides fast, native PHP templating with no external dependencies.
@@ -77,7 +87,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     public function render(string $name, $params = []): string
     {
         // Ensure params is array
-        if (! is_array($params)) {
+        if (!is_array($params)) {
             $params = [];
         }
 
@@ -87,18 +97,18 @@ class NativePhpRenderer implements TemplateRendererInterface
         // Parse template name (namespace::template)
         if (str_contains($name, '::')) {
             [$namespace, $template] = explode('::', $name, 2);
-            $templatePath           = $this->findTemplate($namespace, $template);
+            $templatePath = $this->findTemplate($namespace, $template);
         } else {
             $templatePath = $this->findTemplate('', $name);
         }
 
-        if (! $templatePath || ! file_exists($templatePath)) {
+        if (!$templatePath || !file_exists($templatePath)) {
             throw new RuntimeException("Template '{$name}' not found");
         }
 
         // Reset layout for each render
         $this->layoutTemplate = null;
-        $this->layoutData     = [];
+        $this->layoutData = [];
 
         // Render template content
         $content = $this->renderTemplate($templatePath, $allParams);
@@ -108,6 +118,7 @@ class NativePhpRenderer implements TemplateRendererInterface
         if ($this->layoutTemplate !== null) {
             /** @var array<string, mixed> $layoutParams */
             $layoutParams = array_merge($this->layoutData, ['content' => $content]);
+
             return $this->render($this->layoutTemplate, $layoutParams);
         }
 
@@ -127,7 +138,7 @@ class NativePhpRenderer implements TemplateRendererInterface
         $sanitizedPath = $this->sanitizePath($path);
 
         $namespace = $namespace ?: '';
-        if (! isset($this->paths[$namespace])) {
+        if (!isset($this->paths[$namespace])) {
             $this->paths[$namespace] = [];
         }
         $this->paths[$namespace][] = rtrim($sanitizedPath, '/');
@@ -146,6 +157,7 @@ class NativePhpRenderer implements TemplateRendererInterface
                 $templatePaths[] = new TemplatePath($path, $namespace === '' ? null : $namespace);
             }
         }
+
         return $templatePaths;
     }
 
@@ -158,17 +170,17 @@ class NativePhpRenderer implements TemplateRendererInterface
      */
     public function addDefaultParam(string $templateName, string $param, $value): void
     {
-        if (! isset($this->defaultParams[$templateName])) {
+        if (!isset($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];
         }
-        if (! is_array($this->defaultParams[$templateName])) {
+        if (!is_array($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];
         }
         $this->defaultParams[$templateName][$param] = $value;
     }
 
     /**
-     * Initialize template paths from Paths service and configuration
+     * Initialize template paths from Paths service and configuration.
      */
     private function initializeTemplatePaths(): void
     {
@@ -182,11 +194,12 @@ class NativePhpRenderer implements TemplateRendererInterface
                     $this->addPath($path, $namespace);
                 }
             }
+
             return; // If we have templates config, use only that
         }
 
         // Fallback: try to load from Paths service (v6.0 way)
-        $allPaths           = $this->pathsService->all();
+        $allPaths = $this->pathsService->all();
         $templateNamespaces = ['layout', 'app', 'error', 'page', 'partial'];
 
         foreach ($templateNamespaces as $namespace) {
@@ -196,11 +209,11 @@ class NativePhpRenderer implements TemplateRendererInterface
         }
 
         // Fallback to config-based paths (backward compatibility)
-        if (! isset($this->config['paths']) || ! is_array($this->config['paths'])) {
+        if (!isset($this->config['paths']) || !is_array($this->config['paths'])) {
             return;
         }
 
-        if (! isset($this->config['paths']['templates']) || ! is_array($this->config['paths']['templates'])) {
+        if (!isset($this->config['paths']['templates']) || !is_array($this->config['paths']['templates'])) {
             return;
         }
 
@@ -209,7 +222,7 @@ class NativePhpRenderer implements TemplateRendererInterface
 
         foreach ($templateConfig as $namespace => $relativePath) {
             // Only add if not already added from Paths service
-            if (! isset($this->paths[$namespace])) {
+            if (!isset($this->paths[$namespace])) {
                 $absolutePath = $this->pathsService->getPath($relativePath, '');
                 $this->addPath($absolutePath, $namespace);
             }
@@ -217,7 +230,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * Find template file
+     * Find template file.
      *
      * @param string $namespace Template namespace
      * @param string $template Template name
@@ -235,7 +248,7 @@ class NativePhpRenderer implements TemplateRendererInterface
             $templatePath = $path . '/' . $sanitizedTemplate;
 
             // Try with .phtml extension if not provided
-            if (! pathinfo($templatePath, PATHINFO_EXTENSION)) {
+            if (!pathinfo($templatePath, PATHINFO_EXTENSION)) {
                 $templatePath .= '.phtml';
             }
 
@@ -249,7 +262,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * Merge default parameters with render parameters
+     * Merge default parameters with render parameters.
      *
      * @param string $templateName Template name
      * @param array<string, mixed> $params Render parameters
@@ -257,24 +270,25 @@ class NativePhpRenderer implements TemplateRendererInterface
      */
     private function mergeDefaultParams(string $templateName, array $params): array
     {
-        $allDefaults      = $this->defaultParams[self::TEMPLATE_ALL] ?? [];
+        $allDefaults = $this->defaultParams[self::TEMPLATE_ALL] ?? [];
         $templateDefaults = $this->defaultParams[$templateName] ?? [];
 
         // Ensure defaults are arrays
-        if (! is_array($allDefaults)) {
+        if (!is_array($allDefaults)) {
             $allDefaults = [];
         }
-        if (! is_array($templateDefaults)) {
+        if (!is_array($templateDefaults)) {
             $templateDefaults = [];
         }
 
         /** @var array<string, mixed> $result */
         $result = array_merge($allDefaults, $templateDefaults, $params);
+
         return $result;
     }
 
     /**
-     * Render template file
+     * Render template file.
      *
      * @param string $templatePath Path to template file
      * @param array<string, mixed> $params Template parameters
@@ -293,6 +307,7 @@ class NativePhpRenderer implements TemplateRendererInterface
             if (is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
                 return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
             }
+
             return '';
         };
 
@@ -301,8 +316,10 @@ class NativePhpRenderer implements TemplateRendererInterface
             if ($this->urlHelper !== null) {
                 /** @var array<string, mixed> $params */
                 $params = $routeParams;
+
                 return $this->urlHelper->generate($route !== '' ? $route : null, $params);
             }
+
             // Fallback for basic URL generation
             return '/' . ltrim($route, '/');
         };
@@ -319,7 +336,7 @@ class NativePhpRenderer implements TemplateRendererInterface
         $layout = function (string $layoutName, array $layoutParams = []): void {
             $this->layoutTemplate = $layoutName;
             /** @var array<string, mixed> $params */
-            $params           = $layoutParams;
+            $params = $layoutParams;
             $this->layoutData = $params;
         };
 
@@ -335,7 +352,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * Sanitize path to prevent path traversal attacks
+     * Sanitize path to prevent path traversal attacks.
      *
      * @param string $path Path to sanitize
      * @return string Sanitized path
@@ -363,7 +380,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * Sanitize template name to prevent path traversal attacks
+     * Sanitize template name to prevent path traversal attacks.
      *
      * @param string $template Template name to sanitize
      * @return string Sanitized template name
@@ -390,7 +407,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * Check if resolved path is safe (within allowed directory)
+     * Check if resolved path is safe (within allowed directory).
      *
      * @param string $resolvedPath Full path to template file
      * @param string $allowedBasePath Base path that should contain the file
@@ -399,7 +416,7 @@ class NativePhpRenderer implements TemplateRendererInterface
     private function isPathSafe(string $resolvedPath, string $allowedBasePath): bool
     {
         $realResolvedPath = realpath($resolvedPath);
-        $realBasePath     = realpath($allowedBasePath);
+        $realBasePath = realpath($allowedBasePath);
 
         // If realpath fails, consider it unsafe
         if ($realResolvedPath === false || $realBasePath === false) {

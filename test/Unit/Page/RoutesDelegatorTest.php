@@ -25,13 +25,13 @@ class RoutesDelegatorTest extends TestCase
      */
     public function testWillInvoke(): void
     {
-        $moduleName   = 'test';
-        $routeName    = 'test_route_name';
-        $routeUri     = sprintf('/%s/%s', $moduleName, $routeName);
+        $moduleName = 'test';
+        $routeName = 'test_route_name';
+        $routeUri = sprintf('/%s/%s', $moduleName, $routeName);
         $templateName = sprintf('%s::%s', $moduleName, $routeName);
 
         $container = $this->createMock(ContainerInterface::class);
-        $app       = $this->createMock(Application::class);
+        $app = $this->createMock(Application::class);
 
         $app->method('get')->willReturn($this->createMock(Route::class));
         $app
@@ -51,7 +51,7 @@ class RoutesDelegatorTest extends TestCase
             ],
         ]);
 
-        $application  = (new RoutesDelegator())(
+        $application = (new RoutesDelegator())(
             $container,
             '',
             $callback = function () use ($app) {

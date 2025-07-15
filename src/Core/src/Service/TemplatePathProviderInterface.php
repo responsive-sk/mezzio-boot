@@ -7,7 +7,7 @@ namespace Light\Core\Service;
 use InvalidArgumentException;
 
 /**
- * Interface for providing template paths to Twig environment
+ * Interface for providing template paths to Twig environment.
  *
  * This interface follows PSR-15 compliance and Zend4Boot protocol
  * for centralized path management using responsive-sk/slim4-paths.
@@ -15,7 +15,7 @@ use InvalidArgumentException;
 interface TemplatePathProviderInterface
 {
     /**
-     * Get all template paths for Twig loader
+     * Get all template paths for Twig loader.
      *
      * Returns an associative array where keys are namespace names
      * and values are absolute paths to template directories.
@@ -25,7 +25,7 @@ interface TemplatePathProviderInterface
     public function getTemplatePaths(): array;
 
     /**
-     * Get template path for specific namespace
+     * Get template path for specific namespace.
      *
      * @param string $namespace Template namespace (e.g., 'app', 'error', 'layout')
      * @return string Absolute path to template directory
@@ -34,7 +34,7 @@ interface TemplatePathProviderInterface
     public function getTemplatePathForNamespace(string $namespace): string;
 
     /**
-     * Check if template namespace exists
+     * Check if template namespace exists.
      *
      * @param string $namespace Template namespace to check
      * @return bool True if namespace is configured
@@ -42,7 +42,7 @@ interface TemplatePathProviderInterface
     public function hasTemplateNamespace(string $namespace): bool;
 
     /**
-     * Get all available template namespaces
+     * Get all available template namespaces.
      *
      * @return array<string> List of configured template namespaces
      */

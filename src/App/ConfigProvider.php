@@ -15,16 +15,15 @@ use ResponsiveSk\Slim4Paths\Paths;
 class ConfigProvider
 {
     /**
-    @return array{
-     *     dependencies: array<mixed>,
-     *     templates: array<mixed>,
-     * }
+     * Return configuration for this module.
+     *
+     * @return array<string, mixed>
      */
     public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
+            'templates' => $this->getTemplates(),
         ];
     }
 
@@ -42,10 +41,10 @@ class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
-            'factories'  => [
+            'factories' => [
                 GetIndexViewHandler::class => GetIndexViewHandlerFactory::class,
                 PathsExampleHandler::class => PathsExampleHandlerFactory::class,
-                Paths::class               => PathsFactory::class,
+                Paths::class => PathsFactory::class,
                 \Light\App\Handler\BootstrapDemoHandler::class => \Light\App\Factory\BootstrapDemoHandlerFactory::class,
                 \Light\App\Handler\MainDemoHandler::class => \Light\App\Factory\MainDemoHandlerFactory::class,
             ],
@@ -53,7 +52,7 @@ class ConfigProvider
     }
 
     /**
-     * Returns the templates configuration
+     * Returns the templates configuration.
      *
      * NOTE: Template paths are now managed centrally via TemplatePathProvider
      * and configured in config/autoload/paths.global.php.

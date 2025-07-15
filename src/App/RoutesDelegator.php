@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Light\App;
 
+use function assert;
+
 use Light\App\Handler\BootstrapDemoHandler;
 use Light\App\Handler\GetIndexViewHandler;
 use Light\App\Handler\MainDemoHandler;
 use Light\App\Handler\PathsExampleHandler;
 use Mezzio\Application;
 use Psr\Container\ContainerInterface;
-
-use function assert;
 
 class RoutesDelegator
 {

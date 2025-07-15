@@ -10,7 +10,7 @@ use Light\Core\Service\TemplatePathProviderInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
 /**
- * Core module configuration provider
+ * Core module configuration provider.
  *
  * Provides core infrastructure services following Zend4Boot protocol
  * and PSR-15 compliance. This module contains shared services used
@@ -19,7 +19,7 @@ use Mezzio\Template\TemplateRendererInterface;
 class ConfigProvider
 {
     /**
-     * Return configuration for this module
+     * Return configuration for this module.
      *
      * @return array<string, mixed>
      */
@@ -31,7 +31,7 @@ class ConfigProvider
     }
 
     /**
-     * Return dependency configuration
+     * Return dependency configuration.
      *
      * @return array<string, mixed>
      */

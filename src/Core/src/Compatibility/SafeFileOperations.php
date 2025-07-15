@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Light\Core\Compatibility;
 
+use function chmod;
+
 use Exception;
 
-use function chmod;
 use function file_put_contents;
 use function is_dir;
-use function mkdir;
 
 use const LOCK_EX;
 
+use function mkdir;
+
 /**
- * Safe file operations for shared hosting environments
+ * Safe file operations for shared hosting environments.
  *
  * Provides fallbacks for file operations that might fail on shared hosting
  * due to permission restrictions or disabled functions.
@@ -22,13 +24,13 @@ use const LOCK_EX;
 class SafeFileOperations
 {
     /**
-     * Safely create directory with fallbacks
+     * Safely create directory with fallbacks.
      *
      * @param string $path Directory path to create
      * @param int $mode Directory permissions (ignored on some shared hosts)
      * @return bool True if directory exists or was created
      */
-    public static function createDirectory(string $path, int $mode = 0755): bool
+    public static function createDirectory(string $path, int $mode = 0o755): bool
     {
         if (is_dir($path)) {
             return true;
@@ -49,7 +51,7 @@ class SafeFileOperations
     }
 
     /**
-     * Safely write file with fallbacks
+     * Safely write file with fallbacks.
      *
      * @param string $file File path
      * @param string $content Content to write
@@ -60,6 +62,7 @@ class SafeFileOperations
     {
         try {
             $flags = $useLock ? LOCK_EX : 0;
+
             return file_put_contents($file, $content, $flags) !== false;
         } catch (Exception $e) {
             // Fallback: try without lock
@@ -72,7 +75,7 @@ class SafeFileOperations
     }
 
     /**
-     * Safely change file permissions
+     * Safely change file permissions.
      *
      * @param string $path File or directory path
      * @param int $mode Permissions mode
@@ -89,7 +92,7 @@ class SafeFileOperations
     }
 
     /**
-     * Create var directory structure safely
+     * Create var directory structure safely.
      *
      * @param string $basePath Base application path
      * @return bool True if all directories exist or were created
@@ -111,7 +114,7 @@ class SafeFileOperations
         $success = true;
         foreach ($varDirs as $dir) {
             $fullPath = $basePath . '/' . $dir;
-            if (! self::createDirectory($fullPath)) {
+            if (!self::createDirectory($fullPath)) {
                 $success = false;
             }
         }
@@ -120,7 +123,7 @@ class SafeFileOperations
     }
 
     /**
-     * Create .gitignore files for var directories
+     * Create .gitignore files for var directories.
      *
      * @param string $basePath Base application path
      * @return bool True if successful
@@ -139,7 +142,7 @@ class SafeFileOperations
         $success = true;
         foreach ($dirs as $dir) {
             $gitignorePath = $basePath . '/' . $dir . '/.gitignore';
-            if (! self::safeWrite($gitignorePath, $gitignoreContent, false)) {
+            if (!self::safeWrite($gitignorePath, $gitignoreContent, false)) {
                 $success = false;
             }
         }

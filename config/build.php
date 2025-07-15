@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * Build Configuration
- * 
+ * Build Configuration.
+ *
  * Configure build settings for production deployment
  */
 
 return [
     // Base URL for sitemap.xml and robots.txt
     'base_url' => 'https://ozi.responsive.sk',
-    
+
     // Build settings
     'build' => [
         'directory' => './build',
         'package_name' => 'responsive-light',
         'version' => 'auto', // 'auto' = timestamp, or specify version like '1.0.0'
     ],
-    
+
     // Web files configuration
     'web_files' => [
         'robots_txt' => [
@@ -30,7 +30,7 @@ return [
                 // '/api/internal/',
             ],
         ],
-        
+
         'sitemap_xml' => [
             'enabled' => true,
             'additional_urls' => [
@@ -42,7 +42,7 @@ return [
                 // ],
             ],
         ],
-        
+
         'htaccess_optimizations' => [
             'enabled' => true,
             'security_headers' => true,
@@ -51,7 +51,7 @@ return [
             'browser_caching' => true,
         ],
     ],
-    
+
     // Environment-specific overrides
     'environments' => [
         'production' => [

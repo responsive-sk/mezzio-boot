@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Light\App\Factory;
 
-use Psr\Container\ContainerInterface;
-use ResponsiveSk\Slim4Paths\Paths;
-
 use function assert;
 use function dirname;
 use function is_array;
 use function is_string;
+
+use Psr\Container\ContainerInterface;
+use ResponsiveSk\Slim4Paths\Paths;
 
 class PathsFactory
 {

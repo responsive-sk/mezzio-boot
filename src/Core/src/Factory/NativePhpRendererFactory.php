@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Light\Core\Factory;
 
+use function assert;
+use function is_array;
+
 use Light\Core\Template\NativePhpRenderer;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 use ResponsiveSk\Slim4Paths\Paths;
 
-use function assert;
-use function is_array;
-
 /**
- * Factory for Native PHP template renderer
+ * Factory for Native PHP template renderer.
  *
  * Creates NativePhpRenderer with proper dependencies.
  * Follows PSR-11 container interface and Zend4Boot protocol.
@@ -22,7 +22,7 @@ use function is_array;
 class NativePhpRendererFactory
 {
     /**
-     * Create NativePhpRenderer instance
+     * Create NativePhpRenderer instance.
      *
      * @param ContainerInterface $container DI container
      */

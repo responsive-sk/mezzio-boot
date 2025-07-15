@@ -7,7 +7,7 @@ namespace Light\Core\Template\Exception;
 use Exception;
 
 /**
- * Base template exception
+ * Base template exception.
  */
 class TemplateException extends Exception
 {

@@ -14,25 +14,22 @@ use Mezzio\Application;
 class ConfigProvider
 {
     /**
-    @return array{
-     *     dependencies: array<mixed>,
-     *     templates: array<mixed>,
-     * }
+     * Return configuration for this module.
+     *
+     * @return array<string, mixed>
      */
     public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
+            'templates' => $this->getTemplates(),
         ];
     }
 
     /**
-    @return array{
-     *     delegators: array<class-string, array<class-string>>,
-     *     factories: array<class-string, class-string>,
-     *     aliases: array<class-string, class-string>
-     * }
+     * Return dependency configuration.
+     *
+     * @return array<string, mixed>
      */
     public function getDependencies(): array
     {
@@ -42,18 +39,18 @@ class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
-            'factories'  => [
+            'factories' => [
                 GetPageViewHandler::class => GetPageViewHandlerFactory::class,
-                PageService::class        => PageServiceFactory::class,
+                PageService::class => PageServiceFactory::class,
             ],
-            'aliases'    => [
+            'aliases' => [
                 PageServiceInterface::class => PageService::class,
             ],
         ];
     }
 
     /**
-     * Returns the templates configuration
+     * Returns the templates configuration.
      *
      * NOTE: Template paths are now managed centrally via TemplatePathProvider
      * and configured in config/autoload/paths.global.php.

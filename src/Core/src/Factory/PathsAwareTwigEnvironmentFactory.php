@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Light\Core\Factory;
 
+use function assert;
+use function is_array;
+
 use Light\Core\Service\TemplatePathProviderInterface;
 use Psr\Container\ContainerInterface;
 use ResponsiveSk\Slim4Paths\Paths;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-use function assert;
-use function is_array;
-
 /**
- * Paths-aware Twig Environment Factory
+ * Paths-aware Twig Environment Factory.
  *
  * Creates Twig Environment using centralized path configuration
  * via TemplatePathProvider service. Follows PSR-15 compliance
@@ -23,7 +23,7 @@ use function is_array;
 class PathsAwareTwigEnvironmentFactory
 {
     /**
-     * Create Twig Environment instance
+     * Create Twig Environment instance.
      *
      * @param ContainerInterface $container DI container
      * @return Environment Configured Twig environment
@@ -58,10 +58,10 @@ class PathsAwareTwigEnvironmentFactory
 
         // Environment options
         $options = [
-            'cache'            => $paths->getPath('data/cache/twig', ''),
-            'debug'            => $twigConfig['debug'] ?? false,
+            'cache' => $paths->getPath('data/cache/twig', ''),
+            'debug' => $twigConfig['debug'] ?? false,
             'strict_variables' => $twigConfig['strict_variables'] ?? false,
-            'auto_reload'      => $twigConfig['auto_reload'] ?? false,
+            'auto_reload' => $twigConfig['auto_reload'] ?? false,
         ];
 
         $environment = new Environment($loader, $options);

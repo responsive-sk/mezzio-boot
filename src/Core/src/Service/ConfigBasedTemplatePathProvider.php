@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Light\Core\Service;
 
-use InvalidArgumentException;
-use ResponsiveSk\Slim4Paths\Paths;
-
 use function array_key_exists;
 use function array_keys;
+
+use InvalidArgumentException;
+
 use function is_array;
+
+use ResponsiveSk\Slim4Paths\Paths;
+
 use function sprintf;
 
 /**
- * Configuration-based template path provider
+ * Configuration-based template path provider.
  *
  * Provides template paths using centralized configuration and Paths service.
  * Follows Zend4Boot protocol and PSR-15 compliance.
@@ -35,7 +38,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
     }
 
     /**
-     * Get all template paths for Twig loader
+     * Get all template paths for Twig loader.
      *
      * @return array<string, string> Template paths indexed by namespace
      */
@@ -45,7 +48,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
     }
 
     /**
-     * Get template path for specific namespace
+     * Get template path for specific namespace.
      *
      * @param string $namespace Template namespace
      * @return string Absolute path to template directory
@@ -53,7 +56,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
      */
     public function getTemplatePathForNamespace(string $namespace): string
     {
-        if (! $this->hasTemplateNamespace($namespace)) {
+        if (!$this->hasTemplateNamespace($namespace)) {
             throw new InvalidArgumentException(
                 sprintf('Template namespace "%s" is not configured', $namespace)
             );
@@ -63,7 +66,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
     }
 
     /**
-     * Check if template namespace exists
+     * Check if template namespace exists.
      *
      * @param string $namespace Template namespace to check
      * @return bool True if namespace is configured
@@ -74,7 +77,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
     }
 
     /**
-     * Get all available template namespaces
+     * Get all available template namespaces.
      *
      * @return array<string> List of configured template namespaces
      */
@@ -84,15 +87,15 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
     }
 
     /**
-     * Initialize template paths from configuration
+     * Initialize template paths from configuration.
      */
     private function initializeTemplatePaths(): void
     {
-        if (! isset($this->config['paths']) || ! is_array($this->config['paths'])) {
+        if (!isset($this->config['paths']) || !is_array($this->config['paths'])) {
             return;
         }
 
-        if (! isset($this->config['paths']['templates']) || ! is_array($this->config['paths']['templates'])) {
+        if (!isset($this->config['paths']['templates']) || !is_array($this->config['paths']['templates'])) {
             return;
         }
 
@@ -101,7 +104,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
 
         foreach ($templateConfig as $namespace => $relativePath) {
             // Use Paths service to get absolute path
-            $absolutePath                    = $this->paths->getPath($relativePath, '');
+            $absolutePath = $this->paths->getPath($relativePath, '');
             $this->templatePaths[$namespace] = $absolutePath;
         }
     }

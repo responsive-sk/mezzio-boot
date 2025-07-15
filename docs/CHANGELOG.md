@@ -1,5 +1,35 @@
 # Changelog
 
+## [Unreleased] - 2025-07-15
+
+### Added
+- **Complete Theme System**: Bootstrap 5.3 and TailwindCSS + Alpine.js themes with Vite build system
+- **Demo Pages**: `/bootstrap-demo` and `/main-demo` showcasing theme capabilities and components
+- **Code Quality Tools**: PHPStan at maximum strictness level and PHP CS Fixer with PSR-12 compliance
+- **Template Integration**: Enhanced NativePhpRenderer with priority-based path resolution
+- **Production Assets**: Optimized theme compilation with hash-based versioning for cache busting
+
+### Changed
+- **Simplified src/ Structure**: Flat organization removing nested `src/src/` directories
+- **Template Paths**: Consolidated to `src/Templates/` with proper namespace configuration
+- **Asset Management**: Direct Vite-generated URLs replacing complex AssetHelper dependencies
+- **Code Standards**: All code passes PHPStan max level (10/10) with zero errors
+- **Build System**: Modern Vite compilation with parallel processing and optimization
+
+### Fixed
+- **Template Loading**: Resolved NativePhpRenderer path resolution for all namespaces
+- **Page Routes**: Fixed template paths for Page module (`src/Page/templates/page`)
+- **Type Safety**: Added comprehensive type annotations throughout codebase
+- **Code Style**: Standardized PSR-12 formatting across all PHP files
+- **Dependencies**: Removed unused imports and simplified factory patterns
+
+### Technical Details
+- **PHPStan Level**: Maximum (10/10) with comprehensive type checking
+- **Theme Assets**: Bootstrap (31KB gzipped CSS + 24KB JS), TailwindCSS (3.5KB gzipped CSS + 16KB JS)
+- **Build Performance**: Vite hot reload and production optimization
+- **Template System**: Multi-source path resolution with templates config priority
+- **Security**: Enhanced path traversal protection and input sanitization
+
 ## 1.2.0 - 2025-03-03
 
 Implemented `PSR-15`-compliant request handlers, which replace request controllers.

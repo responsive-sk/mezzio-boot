@@ -25,10 +25,10 @@ class GetIndexViewHandler implements RequestHandlerInterface
         $templateData = [
             'paths' => [
                 'public' => $this->paths->getPath('public'),
-                'base'   => $this->paths->getPath('base'),
-                'var'    => $this->paths->getPath('var'),
-                'logs'   => $this->paths->getPath('logs'),
-                'cache'  => $this->paths->getPath('cache'),
+                'base' => $this->paths->getPath('base'),
+                'var' => $this->paths->getPath('var'),
+                'logs' => $this->paths->getPath('logs'),
+                'cache' => $this->paths->getPath('cache'),
             ],
         ];
 

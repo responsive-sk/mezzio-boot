@@ -17,7 +17,9 @@ class ConfigProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->config = (new ConfigProvider())();
+        /** @var array<string, mixed> $config */
+        $config = (new ConfigProvider())();
+        $this->config = $config;
     }
 
     public function testConfigHasDependencies(): void

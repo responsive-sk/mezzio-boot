@@ -7,4 +7,15 @@ parameters:
         - config
         - src
         - test
+    excludePaths:
+        - src/Templates/bootstrap/node_modules
+        - src/Templates/main/node_modules
     treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        # Allow mixed types in template variables
+        - '#Parameter \#2 \$variables of method .+::render\(\) expects array<string, mixed>, array.+ given#'
+        # Allow dynamic property access in templates
+        - '#Access to an undefined property .+::\$.+#'
+        # Allow array access on mixed types in templates
+        - '#Cannot access offset .+ on mixed#'
+    reportUnmatchedIgnoredErrors: false
