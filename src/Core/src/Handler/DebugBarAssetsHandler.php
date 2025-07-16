@@ -17,66 +17,71 @@ class DebugBarAssetsHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $debugBar = new StandardDebugBar();
-        $renderer = $debugBar->getJavascriptRenderer();
-
         $path = $request->getUri()->getPath();
         $relativePath = str_replace('/debugbar/', '', $path);
 
-        // Try to get asset content from renderer
-        try {
-            $assets = $renderer->getAssets();
+        // Map DebugBar resource paths to actual vendor files
+        $debugBarResourcesPath = __DIR__ . '/../../../../vendor/php-debugbar/php-debugbar/src/DebugBar/Resources/';
+        $filePath = $debugBarResourcesPath . $relativePath;
 
-            // Check CSS assets
-            if (isset($assets['css'])) {
-                foreach ($assets['css'] as $asset) {
-                    if (str_contains($asset, $relativePath)) {
-                        $content = file_get_contents($asset);
-                        if ($content !== false) {
-                            return $this->createResponse($content, 'text/css');
-                        }
-                    }
-                }
-            }
+        // Security check - ensure we're only serving files from DebugBar resources
+        $realPath = realpath($filePath);
+        $realResourcesPath = realpath($debugBarResourcesPath);
 
-            // Check JS assets
-            if (isset($assets['js'])) {
-                foreach ($assets['js'] as $asset) {
-                    if (str_contains($asset, $relativePath)) {
-                        $content = file_get_contents($asset);
-                        if ($content !== false) {
-                            return $this->createResponse($content, 'application/javascript');
-                        }
-                    }
-                }
-            }
-
-            // Fallback: serve combined assets
-            if (str_ends_with($relativePath, '.css')) {
-                $content = $renderer->dumpCssAssets();
-                return $this->createResponse($content ?: '/* DebugBar CSS */', 'text/css');
-            }
-
-            if (str_ends_with($relativePath, '.js')) {
-                $content = $renderer->dumpJsAssets();
-                return $this->createResponse($content ?: '/* DebugBar JS */', 'application/javascript');
-            }
-
-        } catch (\Exception $e) {
-            // Fallback for any errors
-            if (str_ends_with($relativePath, '.css')) {
-                $content = $renderer->dumpCssAssets();
-                return $this->createResponse($content ?: '/* DebugBar CSS fallback */', 'text/css');
-            }
-
-            if (str_ends_with($relativePath, '.js')) {
-                $content = $renderer->dumpJsAssets();
-                return $this->createResponse($content ?: '/* DebugBar JS fallback */', 'application/javascript');
-            }
+        if ($realPath === false || !str_starts_with($realPath, $realResourcesPath)) {
+            return new Response('php://memory', 404);
         }
 
-        // 404 for unknown assets
-        return new Response('php://memory', 404);
+        // Check if file exists
+        if (!file_exists($realPath) || !is_file($realPath)) {
+            return new Response('php://memory', 404);
+        }
+
+        // Get file content
+        $content = file_get_contents($realPath);
+        if ($content === false) {
+            return new Response('php://memory', 404);
+        }
+
+        // Determine content type
+        $contentType = 'text/plain';
+        $extension = pathinfo($realPath, PATHINFO_EXTENSION);
+
+        switch ($extension) {
+            case 'css':
+                $contentType = 'text/css';
+                break;
+            case 'js':
+                $contentType = 'application/javascript';
+                break;
+            case 'png':
+                $contentType = 'image/png';
+                break;
+            case 'gif':
+                $contentType = 'image/gif';
+                break;
+            case 'jpg':
+            case 'jpeg':
+                $contentType = 'image/jpeg';
+                break;
+            case 'svg':
+                $contentType = 'image/svg+xml';
+                break;
+            case 'woff':
+                $contentType = 'font/woff';
+                break;
+            case 'woff2':
+                $contentType = 'font/woff2';
+                break;
+            case 'ttf':
+                $contentType = 'font/ttf';
+                break;
+            case 'eot':
+                $contentType = 'application/vnd.ms-fontobject';
+                break;
+        }
+
+        return $this->createResponse($content, $contentType);
     }
     
     private function createResponse(string $content, string $contentType): ResponseInterface

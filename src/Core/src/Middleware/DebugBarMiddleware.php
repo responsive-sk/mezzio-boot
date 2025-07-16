@@ -23,7 +23,10 @@ class DebugBarMiddleware implements MiddlewareInterface
     {
         $this->debugBar = new \DebugBar\StandardDebugBar();
         $this->renderer = $this->debugBar->getJavascriptRenderer();
-        // Force inline rendering to avoid asset loading issues
+
+        // Set correct base URL to match our route
+        $this->renderer->setBaseUrl('/debugbar');
+        $this->renderer->setIncludeVendors(true);
         $this->renderer->setEnableJqueryNoConflict(false);
     }
 
@@ -80,19 +83,8 @@ class DebugBarMiddleware implements MiddlewareInterface
         }
 
         try {
-            // Get inline CSS and JS
-            $css = $this->renderer->dumpCssAssets();
-            $js = $this->renderer->dumpJsAssets();
-
-            $debugBarHtml = '';
-            if ($css) {
-                $debugBarHtml .= '<style type="text/css">' . $css . '</style>';
-            }
-            if ($js) {
-                $debugBarHtml .= '<script type="text/javascript">' . $js . '</script>';
-            }
-            $debugBarHtml .= $this->renderer->render();
-
+            // Use the standard DebugBar rendering approach
+            $debugBarHtml = $this->renderer->renderHead() . $this->renderer->render();
             $body = str_replace('</body>', $debugBarHtml . '</body>', $body);
 
             $response->getBody()->rewind();
