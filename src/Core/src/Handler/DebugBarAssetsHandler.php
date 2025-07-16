@@ -19,22 +19,62 @@ class DebugBarAssetsHandler implements RequestHandlerInterface
     {
         $debugBar = new StandardDebugBar();
         $renderer = $debugBar->getJavascriptRenderer();
-        
+
         $path = $request->getUri()->getPath();
-        $file = basename($path);
-        
-        // Serve CSS
-        if (str_ends_with($file, '.css')) {
-            $content = $renderer->dumpCssAssets();
-            return $this->createResponse($content, 'text/css');
+        $relativePath = str_replace('/debugbar/', '', $path);
+
+        // Try to get asset content from renderer
+        try {
+            $assets = $renderer->getAssets();
+
+            // Check CSS assets
+            if (isset($assets['css'])) {
+                foreach ($assets['css'] as $asset) {
+                    if (str_contains($asset, $relativePath)) {
+                        $content = file_get_contents($asset);
+                        if ($content !== false) {
+                            return $this->createResponse($content, 'text/css');
+                        }
+                    }
+                }
+            }
+
+            // Check JS assets
+            if (isset($assets['js'])) {
+                foreach ($assets['js'] as $asset) {
+                    if (str_contains($asset, $relativePath)) {
+                        $content = file_get_contents($asset);
+                        if ($content !== false) {
+                            return $this->createResponse($content, 'application/javascript');
+                        }
+                    }
+                }
+            }
+
+            // Fallback: serve combined assets
+            if (str_ends_with($relativePath, '.css')) {
+                $content = $renderer->dumpCssAssets();
+                return $this->createResponse($content ?: '/* DebugBar CSS */', 'text/css');
+            }
+
+            if (str_ends_with($relativePath, '.js')) {
+                $content = $renderer->dumpJsAssets();
+                return $this->createResponse($content ?: '/* DebugBar JS */', 'application/javascript');
+            }
+
+        } catch (\Exception $e) {
+            // Fallback for any errors
+            if (str_ends_with($relativePath, '.css')) {
+                $content = $renderer->dumpCssAssets();
+                return $this->createResponse($content ?: '/* DebugBar CSS fallback */', 'text/css');
+            }
+
+            if (str_ends_with($relativePath, '.js')) {
+                $content = $renderer->dumpJsAssets();
+                return $this->createResponse($content ?: '/* DebugBar JS fallback */', 'application/javascript');
+            }
         }
 
-        // Serve JS
-        if (str_ends_with($file, '.js')) {
-            $content = $renderer->dumpJsAssets();
-            return $this->createResponse($content, 'application/javascript');
-        }
-        
         // 404 for unknown assets
         return new Response('php://memory', 404);
     }
