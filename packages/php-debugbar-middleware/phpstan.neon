@@ -1,0 +1,13 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - test
+    
+    ignoreErrors:
+        # Allow mixed types for DebugBar collectors
+        - '#Method .* has parameter .* with no value type specified in iterable type array#'
+        - '#Method .* return type has no value type specified in iterable type array#'
+        
+        # DebugBar library uses mixed types extensively
+        - '#Cannot call method .* on DebugBar\\DataCollector\\DataCollectorInterface\|null#'
