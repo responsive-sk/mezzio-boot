@@ -27,6 +27,8 @@ $aggregator = new ConfigAggregator([
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     // Core infrastructure module (must be loaded BEFORE Mezzio\Twig to override factories)
     \Light\Core\ConfigProvider::class,
+    // DebugBar middleware (development only)
+    \ResponsiveSk\PhpDebugBarMiddleware\ConfigProvider::class,
     // Dotkernel packages
     \Dot\ErrorHandler\ConfigProvider::class,
     \Dot\Log\ConfigProvider::class,

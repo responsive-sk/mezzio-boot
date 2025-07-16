@@ -44,6 +44,7 @@
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0.4",
         "phpunit/phpunit": "^10.5.45",
+        "responsive-sk/php-debugbar-middleware": "*",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.13",
         "symfony/var-dumper": "^7.2.3",

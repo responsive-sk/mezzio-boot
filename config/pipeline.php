@@ -18,8 +18,8 @@ return function (Application $app): void {
     // all Exceptions.
     $app->pipe(ErrorHandlerInterface::class);
 
-    // DebugBar middleware (development only)
-    $app->pipe(\Light\Core\Middleware\DebugBarMiddleware::class);
+    // DebugBar middleware (development only) - from responsive-sk/php-debugbar-middleware
+    $app->pipe(\ResponsiveSk\PhpDebugBarMiddleware\DebugBarMiddleware::class);
 
     $app->pipe(ServerUrlMiddleware::class);
 

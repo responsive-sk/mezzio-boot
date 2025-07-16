@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="327"
-   height="61"
-   viewBox="0 0 327 61"
+   width="298.55908"
+   height="57.138336"
+   viewBox="0 0 298.55908 57.138336"
    fill="none"
    version="1.1"
    id="svg12"
@@ -15,34 +15,36 @@
        y="-18.227442"
        width="279.29144"
        height="61.150127"
-       id="rect12" />
+       id="rect12-7" />
   </defs>
   <path
-     style="fill:#ffaaaa;stroke-width:1.88912"
-     d="M 2.6651003,53.324981 15.07099,46.207547 27.476879,53.324981 15.07099,60.442418 Z"
-     id="path2-5" />
+     d="M 6.581915e-8,50.416244 11.641934,43.694153 23.28625,50.416244 11.643125,57.138336 Z"
+     style="fill:#ffaaaa;stroke-width:1.77858"
+     id="path1" />
   <path
-     style="fill:#d40000;stroke-width:1.88912"
-     d="M 2.6651003,53.324981 V 17.794175 L 15.07099,24.855239 v 35.587179 z"
-     id="path3-9" />
+     d="M 6.581915e-8,50.416244 V 16.859375 L 11.641934,23.527904 v 33.610432 z"
+     style="fill:#d40000;stroke-width:1.77858"
+     id="path2" />
   <path
-     style="fill:#ff5555;stroke-width:1.88912"
-     d="M 2.6651003,17.794175 33.679787,-0.05578387 46.085677,7.0616521 15.07099,24.855239 Z"
-     id="path4-3" />
+     d="M 6.581915e-8,16.858183 29.107218,0 40.750343,6.7220921 11.644316,23.527904 Z"
+     style="fill:#ff5555;stroke-width:1.77858"
+     id="path3" />
   <path
-     style="fill:#aa0000;stroke-width:1.88912"
-     d="M 46.085677,7.0616521 V 21.296522 L 27.476879,31.972675 V 53.324981 L 15.07099,60.442418 V 24.855239 Z"
-     id="path5-6" />
+     d="M 40.750343,6.7220921 V 20.166262 L 23.28625,30.24879 V 50.416244 L 11.643125,57.138336 V 23.527904 Z"
+     style="fill:#aa0000;stroke-width:1.77858"
+     id="path4" />
   <text
      xml:space="preserve"
-     id="text12"
-     style="font-size:11.1038px;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12);fill:#d40000;fill-opacity:1"
-     transform="matrix(3.3622138,0,0,3.3622138,-163.89702,66.081943)"><tspan
+     id="text12-2"
+     style="font-size:11.1038px;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-7);display:inline;fill:#d40000;fill-opacity:1"
+     transform="matrix(3.3595923,0,0,3.3595923,-167.40392,68.771876)"><tspan
        x="64.089844"
-       y="-8.1234906"
+       y="-7.8723558"
        id="tspan5"><tspan
-         style="font-weight:bold;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#000000"
+         style="font-weight:bold;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold'"
          id="tspan2">responsive</tspan><tspan
          style="font-weight:bold;font-family:Sans;-inkscape-font-specification:'Sans Bold'"
-         id="tspan4"> .sk</tspan></tspan></text>
+         id="tspan3"> </tspan><tspan
+         style="font-weight:bold;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';fill:#aa0000"
+         id="tspan4">.sk</tspan></tspan></text>
 </svg>
