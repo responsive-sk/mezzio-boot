@@ -25,6 +25,9 @@ class RoutesDelegator
         $app->get('/bootstrap-demo', [BootstrapDemoHandler::class], 'app::bootstrap-demo');
         $app->get('/main-demo', [MainDemoHandler::class], 'app::main-demo');
 
+        // DebugBar assets (development only)
+        $app->get('/debugbar/{file:.+}', [\Light\Core\Handler\DebugBarAssetsHandler::class], 'debugbar::assets');
+
         return $app;
     }
 }

@@ -47,6 +47,7 @@ class ConfigProvider
                 Paths::class => PathsFactory::class,
                 \Light\App\Handler\BootstrapDemoHandler::class => \Light\App\Factory\BootstrapDemoHandlerFactory::class,
                 \Light\App\Handler\MainDemoHandler::class => \Light\App\Factory\MainDemoHandlerFactory::class,
+                \Light\Core\Handler\DebugBarAssetsHandler::class => fn() => new \Light\Core\Handler\DebugBarAssetsHandler(),
             ],
         ];
     }

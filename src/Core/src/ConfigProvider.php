@@ -44,6 +44,9 @@ class ConfigProvider
 
                 // Core template renderer (Native PHP) - register for Mezzio interface
                 TemplateRendererInterface::class => NativePhpRendererFactory::class,
+
+                // DebugBar middleware (development only)
+                \Light\Core\Middleware\DebugBarMiddleware::class => \Light\Core\Factory\DebugBarMiddlewareFactory::class,
             ],
         ];
     }

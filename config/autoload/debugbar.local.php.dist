@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * DebugBar configuration for development
+ * Copy this file to debugbar.local.php to enable DebugBar
+ */
+
+return [
+    'dependencies' => [
+        'factories' => [
+            Light\Core\Middleware\DebugBarMiddleware::class => Light\Core\Factory\DebugBarMiddlewareFactory::class,
+        ],
+    ],
+    
+    'middleware_pipeline' => [
+        [
+            'middleware' => Light\Core\Middleware\DebugBarMiddleware::class,
+            'priority' => 10000, // High priority to wrap everything
+        ],
+    ],
+    
+    'debugbar' => [
+        'enabled' => true,
+        'collectors' => [
+            'messages' => true,
+            'time' => true,
+            'memory' => true,
+            'exceptions' => true,
+            'request' => true,
+        ],
+    ],
+];

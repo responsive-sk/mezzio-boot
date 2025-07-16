@@ -9,12 +9,14 @@ $layout('layout::bootstrap', [
 ?>
 
 <!-- Hero Section -->
-<div class="hero-section position-relative overflow-hidden">
-    <div class="hero-background position-absolute w-100 h-100" style="
-        background: linear-gradient(135deg, rgba(13, 110, 253, 0.9) 0%, rgba(0, 86, 179, 0.9) 100%),
-                    url('/themes/main/assets/javascript.jpg') center/cover no-repeat;
-        z-index: -1;
-    "></div>
+<div class="hero-section position-relative overflow-hidden" style="
+    min-height: 60vh;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.9) 0%, rgba(0, 86, 179, 0.9) 100%),
+                url('/themes/main/assets/javascript.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+"></div>
     <div class="container py-5">
         <div class="row align-items-center min-vh-50">
             <div class="col-lg-8 col-xl-7">

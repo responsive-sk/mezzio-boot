@@ -40,6 +40,7 @@
         "friendsofphp/php-cs-fixer": "^3.84",
         "laminas/laminas-coding-standard": "^3.0.1",
         "laminas/laminas-development-mode": "^3.13.0",
+        "php-debugbar/php-debugbar": "^2.2",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0.4",
         "phpunit/phpunit": "^10.5.45",
