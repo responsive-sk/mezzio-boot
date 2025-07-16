@@ -201,6 +201,25 @@ composer quality
 - **Efficient Asset Serving** - Direct file serving without processing
 - **Memory Efficient** - Lazy loading and minimal memory footprint
 
+## 🎨 Custom Branding
+
+Want to use your own logo instead of the default? Check out our comprehensive [Branding Guide](docs/BRANDING.md) with examples for:
+
+- **Custom Logo Integration** - Replace with your company logo
+- **Theme Customization** - Match your brand colors
+- **Framework-Specific Examples** - Ready-to-use configurations
+- **Best Practices** - Design and performance guidelines
+
+## 🚀 Roadmap & Future Enhancements
+
+See our [Roadmap](docs/ROADMAP.md) for planned features and enhancement ideas:
+
+- Database query collectors
+- Advanced performance monitoring
+- Mobile-responsive design
+- Plugin system architecture
+- Enterprise features
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.

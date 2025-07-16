@@ -118,6 +118,11 @@ class DebugBarMiddleware implements MiddlewareInterface
         try {
             // Use the standard DebugBar rendering approach
             $debugBarHtml = $this->renderer->renderHead() . $this->renderer->render();
+
+            // Add our custom CSS for branding
+            $customCss = '<style type="text/css">' . CustomDebugBarStyles::getMinimalCss() . '</style>';
+            $debugBarHtml = $customCss . $debugBarHtml;
+
             $body = str_replace('</body>', $debugBarHtml . '</body>', $body);
 
             $response->getBody()->rewind();

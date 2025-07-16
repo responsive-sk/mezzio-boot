@@ -1,0 +1,51 @@
+/* Creative Agency Branding - Purple Theme */
+
+/* Custom Logo - Diamond shape */
+a.phpdebugbar-restore-btn {
+    width: 32px !important;
+    height: 32px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+a.phpdebugbar-restore-btn:after {
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2 28,14 16,26 4,14' fill='%23663399'/%3E%3Cpolygon points='16,6 24,14 16,22 8,14' fill='%23aa66cc'/%3E%3C/svg%3E") no-repeat center center !important;
+    background-size: 28px 28px !important;
+    background-color: transparent !important;
+    width: 28px !important;
+    height: 28px !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+}
+
+/* Header gradient */
+div.phpdebugbar-header {
+    background: linear-gradient(135deg, #663399 0%, #441166 100%) !important;
+    color: white !important;
+}
+
+/* Active tab accent */
+a.phpdebugbar-tab.phpdebugbar-active {
+    border-bottom-color: #cc99ff !important;
+    color: #cc99ff !important;
+}
+
+/* Important badges */
+a.phpdebugbar-tab span.phpdebugbar-badge.phpdebugbar-important {
+    background: #ff4757 !important;
+    color: white !important;
+}
+
+/* Creative glow effect */
+div.phpdebugbar-header {
+    box-shadow: 0 0 20px rgba(102, 51, 153, 0.3) !important;
+}
+
+/* Tab hover effects */
+a.phpdebugbar-tab:hover {
+    background-color: rgba(204, 153, 255, 0.1) !important;
+}
