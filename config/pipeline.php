@@ -17,6 +17,10 @@ return function (Application $app): void {
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
     $app->pipe(ErrorHandlerInterface::class);
+
+    // DebugBar middleware (development only)
+    $app->pipe(\Light\Core\Middleware\DebugBarMiddleware::class);
+
     $app->pipe(ServerUrlMiddleware::class);
 
     // Pipe more middleware here that you want to execute on every request:

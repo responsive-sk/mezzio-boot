@@ -16,10 +16,14 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class DebugBarMiddleware implements MiddlewareInterface
 {
-    public function __construct(
-        private readonly DebugBar $debugBar,
-        private readonly JavascriptRenderer $renderer
-    ) {
+    private DebugBar $debugBar;
+    private JavascriptRenderer $renderer;
+
+    public function __construct()
+    {
+        $this->debugBar = new \DebugBar\StandardDebugBar();
+        $this->renderer = $this->debugBar->getJavascriptRenderer();
+        $this->renderer->setBaseUrl('/debugbar');
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -30,7 +34,10 @@ class DebugBarMiddleware implements MiddlewareInterface
         }
 
         // Start collecting data
-        $this->debugBar->startMeasure('request', 'Request Processing');
+        $timeCollector = $this->debugBar->getCollector('time');
+        if ($timeCollector) {
+            $timeCollector->startMeasure('request', 'Request Processing');
+        }
 
         // Add request info
         $this->debugBar['messages']->addMessage('Request: ' . $request->getMethod() . ' ' . (string) $request->getUri());
@@ -38,7 +45,9 @@ class DebugBarMiddleware implements MiddlewareInterface
         $response = $handler->handle($request);
 
         // Stop measuring
-        $this->debugBar->stopMeasure('request');
+        if ($timeCollector) {
+            $timeCollector->stopMeasure('request');
+        }
 
         // Inject DebugBar into HTML response
         if ($this->isHtmlResponse($response)) {
@@ -50,9 +59,8 @@ class DebugBarMiddleware implements MiddlewareInterface
 
     private function isDevelopmentMode(): bool
     {
-        return getenv('APP_ENV') !== 'production' && 
-               getenv('DEBUG') !== 'false' &&
-               php_sapi_name() !== 'cli';
+        // For now, always enable in development
+        return php_sapi_name() !== 'cli';
     }
 
     private function isHtmlResponse(ResponseInterface $response): bool

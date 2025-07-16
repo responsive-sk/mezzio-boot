@@ -25,13 +25,13 @@ class DebugBarAssetsHandler implements RequestHandlerInterface
         
         // Serve CSS
         if (str_ends_with($file, '.css')) {
-            $content = $renderer->dumpAssetsToString('css');
+            $content = $renderer->dumpCssAssets();
             return $this->createResponse($content, 'text/css');
         }
-        
+
         // Serve JS
         if (str_ends_with($file, '.js')) {
-            $content = $renderer->dumpAssetsToString('js');
+            $content = $renderer->dumpJsAssets();
             return $this->createResponse($content, 'application/javascript');
         }
         
