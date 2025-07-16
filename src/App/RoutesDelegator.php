@@ -25,6 +25,9 @@ class RoutesDelegator
         $app->get('/bootstrap-demo', [BootstrapDemoHandler::class], 'app::bootstrap-demo');
         $app->get('/main-demo', [MainDemoHandler::class], 'app::main-demo');
 
+        // DebugBar assets route (from responsive-sk/php-debugbar-middleware)
+        $app->get('/debugbar/{file:.+}', [\ResponsiveSk\PhpDebugBarMiddleware\DebugBarAssetsHandler::class], 'debugbar::assets');
+
         return $app;
     }
 }
