@@ -1,0 +1,86 @@
+<?php
+$layout('layout::tailwind', [
+    'title' => 'Work - responsive.sk',
+    'description' => 'Over the years, we have worked alongside a multitude of businesses from across the globe, on both shorter, and long-term projects.',
+    'body_class' => 'work-page',
+    'cssUrl' => $cssUrl ?? null,
+    'jsUrl' => $jsUrl ?? null,
+]);
+?>
+
+<!-- Hero Section -->
+<div class="bg-white py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                Work
+            </h1>
+            <p class="mt-6 text-lg leading-8 text-gray-600">
+                Over the years, we have worked alongside a multitude of businesses from across the globe, on both shorter, and long-term projects. Have a browse of some of our most recent clients below.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Projects Grid -->
+<div class="bg-gray-50 py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <?php foreach ($projects as $project): ?>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <!-- Project Image -->
+                    <div class="aspect-[16/10] overflow-hidden bg-gray-100">
+                        <img src="<?= $e($project['image']) ?>" 
+                             alt="<?= $e($project['title']) ?>" 
+                             class="h-full w-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    
+                    <!-- Project Content -->
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">
+                                <?= $e($project['title']) ?>
+                            </h3>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                <?= $e($project['category']) ?>
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-6">
+                            <?= $e($project['description']) ?>
+                        </p>
+                        
+                        <!-- Technologies -->
+                        <div class="flex flex-wrap gap-2">
+                            <?php foreach ($project['technologies'] as $tech): ?>
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-800">
+                                    <?= $e($tech) ?>
+                                </span>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-white py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Ready to Start Your Project?
+            </h2>
+            <p class="mt-4 text-lg text-gray-600">
+                We'd love to hear about your project and discuss how we can help bring your ideas to life.
+            </p>
+            <div class="mt-8">
+                <a href="<?= $url('app::contact') ?>" 
+                   class="inline-flex items-center px-8 py-3 bg-black hover:bg-gray-800 text-white font-medium text-lg rounded-full transition-all duration-200 hover:shadow-lg">
+                    Let's Work Together
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
