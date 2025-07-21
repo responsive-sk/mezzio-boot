@@ -12,6 +12,7 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
+use ResponsiveSk\PhpDebugBarMiddleware\DebugBarMiddleware;
 
 return function (Application $app): void {
     // The error handler should be the first (most outer) middleware to catch
@@ -19,7 +20,7 @@ return function (Application $app): void {
     $app->pipe(ErrorHandlerInterface::class);
 
     // DebugBar middleware (development only) - from responsive-sk/php-debugbar-middleware
-    $app->pipe(\ResponsiveSk\PhpDebugBarMiddleware\DebugBarMiddleware::class);
+    $app->pipe(DebugBarMiddleware::class);
 
     $app->pipe(ServerUrlMiddleware::class);
 

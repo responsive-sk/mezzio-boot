@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Light\Page\Factory;
 
-use function assert;
-
 use Light\Page\Handler\GetPageViewHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+
+use function assert;
 
 class GetPageViewHandlerFactory
 {

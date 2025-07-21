@@ -1,10 +1,10 @@
 # Code Quality Standards
 
-This document outlines the code quality standards and tools used in DotKernel Light.
+This document outlines the code quality standards and tools used in Mezzio Boot.
 
 ## Overview
 
-DotKernel Light maintains the highest code quality standards using automated tools and strict configuration. All code must pass maximum level static analysis and follow PSR-12 coding standards.
+Mezzio Boot maintains the highest code quality standards using automated tools and strict configuration. All code must pass maximum level static analysis and follow PSR-12 coding standards.
 
 ## Static Analysis
 
@@ -17,7 +17,6 @@ PHPStan is configured at **maximum strictness level** for comprehensive code ana
 parameters:
     level: max
     paths:
-        - bin
         - config
         - src
         - test
@@ -235,4 +234,4 @@ $name = $user?->getName() ?? 'Unknown';
 public function registerUser(array $userData): User
 ```
 
-This configuration ensures DotKernel Light maintains enterprise-grade code quality suitable for production environments.
+This configuration ensures Mezzio Boot maintains enterprise-grade code quality suitable for production environments.

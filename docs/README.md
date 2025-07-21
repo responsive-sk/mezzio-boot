@@ -1,6 +1,6 @@
-# DotKernel Light Documentation
+# Mezzio Boot Documentation
 
-This is the comprehensive documentation for DotKernel Light - a PSR-15 compliant application skeleton built on Mezzio microframework and Laminas components.
+This is the comprehensive documentation for Mezzio Boot - a PSR-15 compliant application skeleton built on Mezzio microframework and Laminas components.
 
 ## Table of Contents
 

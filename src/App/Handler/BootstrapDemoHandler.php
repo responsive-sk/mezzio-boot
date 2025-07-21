@@ -21,19 +21,19 @@ class BootstrapDemoHandler implements RequestHandlerInterface
     {
         // Jednoduché theme info bez zložitého AssetHelper
         $themeInfo = [
-            'name' => 'Bootstrap 5.3',
-            'version' => '5.3.0',
+            'name'        => 'Bootstrap 5.3',
+            'version'     => '5.3.0',
             'description' => 'Bootstrap CSS framework demo',
         ];
 
         // Vite compiled assets (no hashes for easier maintenance)
         $cssUrl = '/themes/bootstrap/assets/main.css';
-        $jsUrl = '/themes/bootstrap/assets/main.js';
+        $jsUrl  = '/themes/bootstrap/assets/main.js';
 
         $html = $this->template->render('app::bootstrap-demo', [
             'themeInfo' => $themeInfo,
-            'cssUrl' => $cssUrl,
-            'jsUrl' => $jsUrl,
+            'cssUrl'    => $cssUrl,
+            'jsUrl'     => $jsUrl,
         ]);
 
         return new HtmlResponse($html);

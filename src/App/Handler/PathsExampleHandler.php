@@ -24,25 +24,25 @@ class PathsExampleHandler implements RequestHandlerInterface
     {
         // Demonstrate various path methods (v6.0 API)
         $pathsInfo = [
-            'base_path' => $this->paths->getPath('base'),
-            'config_path' => $this->paths->getPath('config'),
-            'src_path' => $this->paths->getPath('src'),
-            'public_path' => $this->paths->getPath('public'),
+            'base_path'      => $this->paths->getPath('base'),
+            'config_path'    => $this->paths->getPath('config'),
+            'src_path'       => $this->paths->getPath('src'),
+            'public_path'    => $this->paths->getPath('public'),
             'templates_path' => $this->paths->getPath('templates'),
-            'cache_path' => $this->paths->getPath('cache'),
-            'logs_path' => $this->paths->getPath('logs'),
-            'uploads_path' => $this->paths->getPath('uploads'),
-            'var_path' => $this->paths->getPath('var'),
-            'data_path' => $this->paths->getPath('data'),
+            'cache_path'     => $this->paths->getPath('cache'),
+            'logs_path'      => $this->paths->getPath('logs'),
+            'uploads_path'   => $this->paths->getPath('uploads'),
+            'var_path'       => $this->paths->getPath('var'),
+            'data_path'      => $this->paths->getPath('data'),
 
             // Specific file examples using buildPath
             'config_file' => $this->paths->buildPath('config/config.php'),
-            'log_file' => $this->paths->buildPath('var/logs/app.log'),
+            'log_file'    => $this->paths->buildPath('var/logs/app.log'),
             'upload_file' => $this->paths->buildPath('var/uploads/example.jpg'),
 
             // Asset paths (using buildPath for files)
-            'css_file' => $this->paths->buildPath('public/css/app.css'),
-            'js_file' => $this->paths->buildPath('public/js/main.js'),
+            'css_file'   => $this->paths->buildPath('public/css/app.css'),
+            'js_file'    => $this->paths->buildPath('public/js/main.js'),
             'image_file' => $this->paths->buildPath('public/images/logo.png'),
 
             // All configured paths
@@ -54,7 +54,7 @@ class PathsExampleHandler implements RequestHandlerInterface
 
         return new JsonResponse([
             'message' => 'Paths service example',
-            'paths' => $pathsInfo,
+            'paths'   => $pathsInfo,
         ]);
     }
 }

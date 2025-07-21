@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Light\Page;
 
-use function assert;
-use function is_array;
-use function is_string;
-
 use Light\Page\Handler\GetPageViewHandler;
 use Mezzio\Application;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+use function assert;
+use function is_array;
+use function is_string;
 use function sprintf;
 
 class RoutesDelegator

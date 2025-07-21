@@ -1,6 +1,6 @@
 # Slovenská dokumentácia
 
-Táto sekcia obsahuje slovenskú dokumentáciu pre DotKernel Light aplikáciu.
+Táto sekcia obsahuje slovenskú dokumentáciu pre Mezzio Boot aplikáciu.
 
 ## Obsah
 

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Light\Core\Compatibility;
 
-use function chmod;
-
 use Exception;
 
+use function chmod;
 use function file_put_contents;
 use function is_dir;
+use function mkdir;
 
 use const LOCK_EX;
-
-use function mkdir;
 
 /**
  * Safe file operations for shared hosting environments.
@@ -114,7 +112,7 @@ class SafeFileOperations
         $success = true;
         foreach ($varDirs as $dir) {
             $fullPath = $basePath . '/' . $dir;
-            if (!self::createDirectory($fullPath)) {
+            if (! self::createDirectory($fullPath)) {
                 $success = false;
             }
         }
@@ -142,7 +140,7 @@ class SafeFileOperations
         $success = true;
         foreach ($dirs as $dir) {
             $gitignorePath = $basePath . '/' . $dir . '/.gitignore';
-            if (!self::safeWrite($gitignorePath, $gitignoreContent, false)) {
+            if (! self::safeWrite($gitignorePath, $gitignoreContent, false)) {
                 $success = false;
             }
         }

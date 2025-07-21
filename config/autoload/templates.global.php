@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'templates' => [
         'extension' => 'phtml',
-        'paths' => [
+        'paths'     => [
             // App Templates
             'app' => ['src/Templates/app'],
 

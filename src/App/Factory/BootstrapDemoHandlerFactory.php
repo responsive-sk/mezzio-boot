@@ -8,6 +8,8 @@ use Light\App\Handler\BootstrapDemoHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
+use function assert;
+
 class BootstrapDemoHandlerFactory
 {
     public function __invoke(ContainerInterface $container): BootstrapDemoHandler

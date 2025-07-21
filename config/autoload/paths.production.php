@@ -1,85 +1,64 @@
 <?php
 
-declare(strict_types=1);
-
 /**
- * Production paths configuration.
+ * Production paths configuration for slim4-paths package.
  *
- * This configuration moves data and logs to /var directory
- * which is more appropriate for production environments.
+ * This configuration follows the official slim4-paths documentation format
+ * and moves data and logs to /var directory for production environments.
+ * See: https://github.com/responsive-sk/slim4-paths
  */
+
+declare(strict_types=1);
 
 return [
     'paths' => [
-        // Base paths configuration for production
+        // Base path - project root directory
         'base_path' => dirname(__DIR__, 2),
 
-        // Use mezzio preset but override with custom paths
-        'preset' => 'mezzio',
-
-        // Override default paths - PRODUCTION VERSION
+        // Custom paths configuration (relative to base_path) - PRODUCTION VERSION
         'custom_paths' => [
-            'data' => dirname(__DIR__, 2) . '/var/data', // CHANGED: moved to var
-            'log' => dirname(__DIR__, 2) . '/var/logs', // CHANGED: moved to var
-            'logs' => dirname(__DIR__, 2) . '/var/logs', // CHANGED: moved to var (alias)
-            'cache' => dirname(__DIR__, 2) . '/var/cache', // CHANGED: moved to var
-            'tmp' => dirname(__DIR__, 2) . '/var/tmp', // CHANGED: moved to var
-        ],
-
-        // Template paths remain the same
-        'templates' => [
-            'app' => 'src/App/templates/app',
-            'error' => 'src/App/templates/error',
-            'layout' => 'src/App/templates/layout',
-            'partial' => 'src/App/templates/partial',
-            'page' => 'src/Page/templates/page',
-        ],
-
-        // Cache directories - moved to var
-        'cache' => [
-            'config' => 'var/cache/config', // CHANGED
-            'twig' => 'var/cache/twig', // CHANGED
-            'routes' => 'var/cache/routes', // CHANGED
-        ],
-
-        // Asset directories remain the same
-        'assets' => [
-            'css' => 'public/css',
-            'js' => 'public/js',
-            'images' => 'public/images',
-            'fonts' => 'public/fonts',
-        ],
-
-        // Module-specific paths remain the same
-        'modules' => [
-            'user' => 'modules/User',
-            'mark' => 'modules/Mark',
-            'blog' => 'modules/Blog',
-        ],
-
-        // Custom paths - moved to var
-        'custom' => [
-            'uploads' => 'public/uploads',
+            // Core directories - moved to var for production
+            'templates' => 'src/Templates',
+            'content'   => 'content',
+            'data'      => 'var/data', // PRODUCTION: moved to var
+            'logs'      => 'var/logs', // PRODUCTION: moved to var
+            'cache'     => 'var/cache', // PRODUCTION: moved to var
+            'storage'   => 'var/storage', // PRODUCTION: moved to var
+            'uploads'   => 'public/uploads',
             'downloads' => 'public/downloads',
-            'temp' => 'var/tmp', // Already in var
-            'sessions' => 'var/sessions', // Already in var
-            'logs' => 'var/logs', // CHANGED: moved to var
+
+            // Development directories
             'tests' => 'test',
-            'docs' => 'docs',
-            'bin' => 'bin',
-        ],
+            'docs'  => 'docs',
+            'bin'   => 'bin',
 
-        // Security configuration remains the same
-        'security' => [
-            'enable_path_traversal_protection' => true,
-            'enable_encoding_protection' => true,
-            'enable_length_validation' => true,
-            'max_path_length' => 4096,
-            'max_filename_length' => 255,
-            'trusted_paths' => [],
-        ],
+            // Asset directories
+            'css'    => 'public/css',
+            'js'     => 'public/js',
+            'images' => 'public/images',
+            'fonts'  => 'public/fonts',
 
-        // Framework preset remains the same
-        'framework_preset' => 'mezzio',
+            // Module directories
+            'modules'     => 'modules',
+            'user_module' => 'modules/User',
+            'mark_module' => 'modules/Mark',
+            'blog_module' => 'modules/Blog',
+
+            // Template subdirectories
+            'app_templates'     => 'src/Templates/app',
+            'error_templates'   => 'src/Templates/error',
+            'layout_templates'  => 'src/Templates/layout',
+            'partial_templates' => 'src/Templates/partial',
+            'page_templates'    => 'src/Page/templates/page',
+
+            // Cache subdirectories - moved to var for production
+            'config_cache' => 'var/cache/config', // PRODUCTION: moved to var
+            'twig_cache'   => 'var/cache/twig', // PRODUCTION: moved to var
+            'routes_cache' => 'var/cache/routes', // PRODUCTION: moved to var
+
+            // Runtime directories - moved to var for production
+            'tmp'      => 'var/tmp', // PRODUCTION: moved to var
+            'sessions' => 'var/sessions', // PRODUCTION: moved to var
+        ],
     ],
 ];

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Light\App\Factory;
 
-use function assert;
-
 use Light\App\Handler\GetIndexViewHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use ResponsiveSk\Slim4Paths\Paths;
+
+use function assert;
 
 class GetIndexViewHandlerFactory
 {

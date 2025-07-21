@@ -1,4 +1,4 @@
-# Build System - DotKernel Light
+# Build System - Mezzio Boot
 
 Nový build systém kompatibilný so slim4-paths v6.0 a var/ directory štruktúrou.
 

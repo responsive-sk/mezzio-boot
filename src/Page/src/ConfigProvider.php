@@ -22,7 +22,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates' => $this->getTemplates(),
+            'templates'    => $this->getTemplates(),
         ];
     }
 
@@ -39,11 +39,11 @@ class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
-            'factories' => [
+            'factories'  => [
                 GetPageViewHandler::class => GetPageViewHandlerFactory::class,
-                PageService::class => PageServiceFactory::class,
+                PageService::class        => PageServiceFactory::class,
             ],
-            'aliases' => [
+            'aliases'    => [
                 PageServiceInterface::class => PageService::class,
             ],
         ];

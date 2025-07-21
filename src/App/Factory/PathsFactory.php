@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Light\App\Factory;
 
+use Psr\Container\ContainerInterface;
+use ResponsiveSk\Slim4Paths\Paths;
+
 use function assert;
 use function dirname;
 use function is_array;
 use function is_string;
-
-use Psr\Container\ContainerInterface;
-use ResponsiveSk\Slim4Paths\Paths;
 
 class PathsFactory
 {
@@ -34,20 +34,8 @@ class PathsFactory
         $customPaths = $pathsConfig['custom_paths'] ?? [];
         assert(is_array($customPaths));
 
-        // Get preset
-        /** @var string $preset */
-        $preset = $pathsConfig['preset'] ?? 'mezzio';
-        assert(is_string($preset));
-
-        // Get template paths
-        /** @var array<string, string> $templatePaths */
-        $templatePaths = $pathsConfig['templates'] ?? [];
-        assert(is_array($templatePaths));
-
-        // Merge template paths with custom paths
-        $allCustomPaths = array_merge($customPaths, $templatePaths);
-
-        // Create lightweight Paths instance with preset and template paths
-        return Paths::withPreset($preset, $basePath, $allCustomPaths);
+        // Create Paths instance according to slim4-paths documentation
+        // Use basic constructor with base path and custom paths
+        return new Paths($basePath, $customPaths);
     }
 }

@@ -1,4 +1,4 @@
-# Konfigurácia Base URL - DotKernel Light
+# Konfigurácia Base URL - Mezzio Boot
 
 Návod na zmenu base URL pre sitemap.xml, robots.txt a deployment instructions.
 
@@ -96,7 +96,7 @@ BUILD_ENV=development ./bin/build.sh production
 
 ### 2. robots.txt
 ```txt
-# Production robots.txt for DotKernel Light
+# Production robots.txt for Mezzio Boot
 User-agent: *
 Allow: /
 

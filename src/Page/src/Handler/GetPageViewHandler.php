@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Light\Page\Handler;
 
-use function assert;
-use function is_string;
-
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Router\RouteResult;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+
+use function assert;
+use function is_string;
 
 class GetPageViewHandler implements RequestHandlerInterface
 {

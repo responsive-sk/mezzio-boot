@@ -30,9 +30,9 @@ class PageHandlerTest extends TestCase
      */
     public function testHandle(): void
     {
-        $routeName = 'test_route_name';
-        $request = $this->createMock(ServerRequestInterface::class);
-        $template = $this->createMock(TemplateRendererInterface::class);
+        $routeName   = 'test_route_name';
+        $request     = $this->createMock(ServerRequestInterface::class);
+        $template    = $this->createMock(TemplateRendererInterface::class);
         $routeResult = $this->createMock(RouteResult::class);
 
         $routeResult

@@ -146,7 +146,7 @@ You should see the `Dotkernel light` welcome page.
 
 ## Theme System
 
-DotKernel Light includes a modern theme system with two pre-built themes:
+Mezzio Boot includes a modern theme system with two pre-built themes:
 
 ### Available Themes
 
@@ -189,7 +189,7 @@ See [Theme System Documentation](docs/theme-system.md) for detailed information.
 
 ## Code Quality
 
-DotKernel Light maintains the highest code quality standards:
+Mezzio Boot maintains the highest code quality standards:
 
 - **PHPStan Level**: Maximum (10/10) with zero errors
 - **Code Style**: PSR-12 compliance with PHP CS Fixer

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * DotKernel Light - Production Build Script.
+ * Mezzio Boot - Production Build Script.
  *
  * Compatible with slim4-paths v6.0 and var/ directory structure
  * Supports multiple build targets: production, shared-hosting, shared-hosting-minimal
@@ -12,7 +12,7 @@ declare(strict_types=1);
 use ResponsiveSk\Slim4Paths\Paths;
 
 // Ensure we're running from project root
-if (!file_exists('composer.json')) {
+if (! file_exists('composer.json')) {
     echo "Error: Must be run from project root directory\n";
     exit(1);
 }
@@ -35,19 +35,19 @@ class ProductionBuilder
     private array $excludePatterns = [];
 
     // Colors for output
-    private const RED = "\033[0;31m";
-    private const GREEN = "\033[0;32m";
+    private const RED    = "\033[0;31m";
+    private const GREEN  = "\033[0;32m";
     private const YELLOW = "\033[1;33m";
-    private const BLUE = "\033[0;34m";
-    private const NC = "\033[0m";
+    private const BLUE   = "\033[0;34m";
+    private const NC     = "\033[0m";
 
     public function __construct(string $buildTarget = 'production')
     {
         $this->buildTarget = $buildTarget;
-        $this->buildDir = $this->getBuildDir();
+        $this->buildDir    = $this->getBuildDir();
         $this->packageName = $this->getPackageName();
-        $version = $_ENV['VERSION'] ?? date('Ymd_His');
-        $this->version = is_string($version) ? $version : date('Ymd_His');
+        $version           = $_ENV['VERSION'] ?? date('Ymd_His');
+        $this->version     = is_string($version) ? $version : date('Ymd_His');
 
         // Initialize paths service with v6.0 API
         $this->initializePaths();
@@ -59,7 +59,7 @@ class ProductionBuilder
         try {
             // Load paths configuration
             /** @var array{paths: array{base_path?: string, custom_paths?: array<string, string>}} $config */
-            $config = require 'config/autoload/paths.global.php';
+            $config   = require 'config/autoload/paths.global.php';
             $basePath = $config['paths']['base_path'] ?? dirname(__DIR__);
 
             // Create Paths instance with v6.0 API
@@ -82,7 +82,7 @@ class ProductionBuilder
     private function getBuildDir(): string
     {
         $buildDir = $_ENV['BUILD_DIR'] ?? './build';
-        $baseDir = is_string($buildDir) ? $buildDir : './build';
+        $baseDir  = is_string($buildDir) ? $buildDir : './build';
 
         return match ($this->buildTarget) {
             'shared-hosting-minimal' => "{$baseDir}/shared-hosting-minimal",
@@ -94,7 +94,7 @@ class ProductionBuilder
     private function getPackageName(): string
     {
         $packageName = $_ENV['PACKAGE_NAME'] ?? 'dotkernel-light';
-        $baseName = is_string($packageName) ? $packageName : 'dotkernel-light';
+        $baseName    = is_string($packageName) ? $packageName : 'dotkernel-light';
 
         return match ($this->buildTarget) {
             'shared-hosting-minimal' => "{$baseName}-shared-hosting-minimal",
@@ -151,7 +151,7 @@ class ProductionBuilder
 
     public function build(): void
     {
-        $this->log("Starting DotKernel Light {$this->buildTarget} build...");
+        $this->log("Starting Mezzio Boot {$this->buildTarget} build...");
 
         try {
             $this->cleanBuild();
@@ -187,7 +187,7 @@ class ProductionBuilder
             $this->removeDirectory($this->buildDir);
         }
 
-        if (!mkdir($this->buildDir, 0o755, true)) {
+        if (! mkdir($this->buildDir, 0o755, true)) {
             throw new RuntimeException("Failed to create build directory: {$this->buildDir}");
         }
 
@@ -222,7 +222,7 @@ class ProductionBuilder
         }
 
         $command = "rsync -av {$excludeArgs} ./ {$this->buildDir}/";
-        $result = $this->executeCommand($command);
+        $result  = $this->executeCommand($command);
 
         if ($result !== 0) {
             throw new RuntimeException('Failed to copy application files');
@@ -254,15 +254,15 @@ class ProductionBuilder
 
         foreach ($varDirs as $dir) {
             $fullPath = $this->paths->buildPath($this->buildDir . '/' . $dir);
-            if (!is_dir($fullPath)) {
-                if (!mkdir($fullPath, 0o755, true)) {
+            if (! is_dir($fullPath)) {
+                if (! mkdir($fullPath, 0o755, true)) {
                     throw new RuntimeException("Failed to create directory: {$fullPath}");
                 }
             }
 
             // Create .gitkeep files to preserve empty directories
             $gitkeepFile = $fullPath . '/.gitkeep';
-            if (!file_exists($gitkeepFile)) {
+            if (! file_exists($gitkeepFile)) {
                 touch($gitkeepFile);
             }
         }
@@ -298,7 +298,7 @@ class ProductionBuilder
         $this->log('Building frontend assets...');
 
         // Check if package.json exists
-        if (!file_exists('package.json')) {
+        if (! file_exists('package.json')) {
             $this->log('No package.json found, skipping asset build');
 
             return;
@@ -336,7 +336,7 @@ class ProductionBuilder
         ];
 
         foreach ($configTemplates as $template) {
-            if (!file_exists($this->buildDir . '/' . $template)) {
+            if (! file_exists($this->buildDir . '/' . $template)) {
                 $this->warning("Configuration template not found: {$template}");
             }
         }
@@ -358,9 +358,9 @@ class ProductionBuilder
     private function setupRobotsTxt(): void
     {
         $robotsDistPath = $this->buildDir . '/public/robots.txt.dist';
-        $robotsPath = $this->buildDir . '/public/robots.txt';
+        $robotsPath     = $this->buildDir . '/public/robots.txt';
 
-        if (!file_exists($robotsDistPath)) {
+        if (! file_exists($robotsDistPath)) {
             $this->warning('robots.txt.dist not found, creating default robots.txt');
             $this->createDefaultRobotsTxt($robotsPath);
 
@@ -382,7 +382,7 @@ class ProductionBuilder
         $sitemapUrl = $this->getSitemapUrl();
 
         return <<<EOF
-            # Production robots.txt for DotKernel Light
+            # Production robots.txt for Mezzio Boot
             # Generated automatically during build process
 
             User-agent: *
@@ -415,7 +415,7 @@ class ProductionBuilder
     {
         $htaccessPath = $this->buildDir . '/public/.htaccess';
 
-        if (!file_exists($htaccessPath)) {
+        if (! file_exists($htaccessPath)) {
             $this->warning('.htaccess not found, creating optimized version');
             $this->createOptimizedHtaccess($htaccessPath);
 
@@ -588,12 +588,12 @@ class ProductionBuilder
         $baseUrl = getenv('BASE_URL') ?: ($_ENV['BASE_URL'] ?? null);
 
         if ($baseUrl === null) {
-            $config = $this->getBuildConfig();
+            $config  = $this->getBuildConfig();
             $baseUrl = $config['base_url'];
         }
 
         // Remove trailing slash
-        if (!is_string($baseUrl)) {
+        if (! is_string($baseUrl)) {
             throw new RuntimeException('Base URL must be a string');
         }
 
@@ -614,7 +614,7 @@ class ProductionBuilder
 
         $configFile = 'config/build.php';
 
-        if (!file_exists($configFile)) {
+        if (! file_exists($configFile)) {
             /** @var array<string, mixed> $config */
             $config = ['base_url' => 'https://yourdomain.com'];
 
@@ -622,7 +622,7 @@ class ProductionBuilder
         }
 
         $loadedConfig = require $configFile;
-        if (!is_array($loadedConfig)) {
+        if (! is_array($loadedConfig)) {
             throw new RuntimeException('Build config must return an array');
         }
         /** @var array<string, mixed> $config */
@@ -633,7 +633,7 @@ class ProductionBuilder
         if (isset($config['environments'][$environment]) && is_array($config['environments'][$environment])) {
             /** @var array<string, mixed> $envConfig */
             $envConfig = $config['environments'][$environment];
-            $config = array_merge($config, $envConfig);
+            $config    = array_merge($config, $envConfig);
         }
 
         return $config;
@@ -689,7 +689,7 @@ class ProductionBuilder
 
     private function executeCommand(string $command): int
     {
-        $output = [];
+        $output     = [];
         $returnCode = 0;
         exec($command . ' 2>&1', $output, $returnCode);
 
@@ -707,12 +707,12 @@ class ProductionBuilder
     {
         $result = shell_exec("which {$command}");
 
-        return !empty($result);
+        return ! empty($result);
     }
 
     private function removeDirectory(string $dir): void
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return;
         }
 
@@ -726,18 +726,18 @@ class ProductionBuilder
 
     private function copyDirectory(string $source, string $destination): void
     {
-        if (!is_dir($source)) {
+        if (! is_dir($source)) {
             return;
         }
 
-        if (!is_dir($destination)) {
+        if (! is_dir($destination)) {
             mkdir($destination, 0o755, true);
         }
 
         $files = array_diff(scandir($source), ['.', '..']);
         foreach ($files as $file) {
             $sourcePath = $source . '/' . $file;
-            $destPath = $destination . '/' . $file;
+            $destPath   = $destination . '/' . $file;
 
             if (is_dir($sourcePath)) {
                 $this->copyDirectory($sourcePath, $destPath);
@@ -749,11 +749,11 @@ class ProductionBuilder
 
     private function copySelectiveLogs(string $source, string $destination): void
     {
-        if (!is_dir($source)) {
+        if (! is_dir($source)) {
             return;
         }
 
-        if (!is_dir($destination)) {
+        if (! is_dir($destination)) {
             mkdir($destination, 0o755, true);
         }
 
@@ -793,7 +793,7 @@ class ProductionBuilder
 
     private function removeEmptyDirectories(string $dir): void
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return;
         }
 
@@ -818,7 +818,7 @@ class ProductionBuilder
         $this->log('Cleaning vendor for minimal production build...');
 
         $vendorDir = $this->buildDir . '/vendor';
-        if (!is_dir($vendorDir)) {
+        if (! is_dir($vendorDir)) {
             return;
         }
 
@@ -868,7 +868,7 @@ class ProductionBuilder
         $this->log('Minimizing bin scripts for shared hosting...');
 
         $binDir = $this->buildDir . '/bin';
-        if (!is_dir($binDir)) {
+        if (! is_dir($binDir)) {
             return;
         }
 
@@ -891,7 +891,7 @@ class ProductionBuilder
         // Copy back only essential scripts
         foreach ($essentialScripts as $script) {
             $sourcePath = 'bin/' . $script;
-            $destPath = $binDir . '/' . $script;
+            $destPath   = $binDir . '/' . $script;
 
             if (file_exists($sourcePath)) {
                 copy($sourcePath, $destPath);
@@ -944,7 +944,7 @@ class ProductionBuilder
         ];
 
         foreach ($requiredFiles as $file) {
-            if (!file_exists($this->buildDir . '/' . $file)) {
+            if (! file_exists($this->buildDir . '/' . $file)) {
                 $this->error("Required file missing: {$file}");
                 $errors++;
             }
@@ -963,7 +963,7 @@ class ProductionBuilder
         ];
 
         foreach ($requiredDirs as $dir) {
-            if (!is_dir($this->buildDir . '/' . $dir)) {
+            if (! is_dir($this->buildDir . '/' . $dir)) {
                 $this->error("Required directory missing: {$dir}");
                 $errors++;
             }
@@ -1012,7 +1012,7 @@ class ProductionBuilder
         $this->log('Creating deployment instructions...');
 
         $instructionsFile = $this->buildDir . '/DEPLOYMENT_INSTRUCTIONS.txt';
-        $packageFile = "{$this->packageName}_{$this->version}.tar.gz";
+        $packageFile      = "{$this->packageName}_{$this->version}.tar.gz";
 
         if ($this->buildTarget === 'shared-hosting-minimal') {
             $instructions = $this->getSharedHostingInstructions($packageFile);
@@ -1027,7 +1027,7 @@ class ProductionBuilder
     private function getSharedHostingInstructions(string $packageFile): string
     {
         return <<<EOF
-            DotKernel Light - Shared Hosting Deployment Instructions
+            Mezzio Boot - Shared Hosting Deployment Instructions
             ========================================================
 
             Package: {$packageFile}
@@ -1096,7 +1096,7 @@ class ProductionBuilder
     private function getProductionInstructions(string $packageFile): string
     {
         return <<<EOF
-            DotKernel Light - Production Deployment Instructions
+            Mezzio Boot - Production Deployment Instructions
             ===================================================
 
             Package: {$packageFile}
@@ -1173,8 +1173,8 @@ class ProductionBuilder
     {
         $packageFile = "{$this->packageName}_{$this->version}.tar.gz";
         $packagePath = getcwd() . '/' . $packageFile;
-        $fileSize = file_exists($packagePath) ? filesize($packagePath) : false;
-        $size = $fileSize !== false ? $this->formatBytes($fileSize) : 'Unknown';
+        $fileSize    = file_exists($packagePath) ? filesize($packagePath) : false;
+        $size        = $fileSize !== false ? $this->formatBytes($fileSize) : 'Unknown';
 
         echo "\n";
         echo "=== Build Summary ===\n";
@@ -1208,10 +1208,10 @@ if (php_sapi_name() !== 'cli') {
     exit(1);
 }
 
-$buildTarget = $argv[1] ?? 'production';
+$buildTarget  = $argv[1] ?? 'production';
 $validTargets = ['production', 'shared-hosting', 'shared-hosting-minimal'];
 
-if (!in_array($buildTarget, $validTargets, true)) {
+if (! in_array($buildTarget, $validTargets, true)) {
     echo 'Invalid build target. Valid options: ' . implode(', ', $validTargets) . "\n";
     exit(1);
 }

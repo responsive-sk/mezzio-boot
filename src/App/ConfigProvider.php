@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Light\App;
 
+use Light\App\Factory\BootstrapDemoHandlerFactory;
 use Light\App\Factory\GetIndexViewHandlerFactory;
+use Light\App\Factory\MainDemoHandlerFactory;
 use Light\App\Factory\PathsExampleHandlerFactory;
 use Light\App\Factory\PathsFactory;
+use Light\App\Handler\BootstrapDemoHandler;
 use Light\App\Handler\GetIndexViewHandler;
+use Light\App\Handler\MainDemoHandler;
 use Light\App\Handler\PathsExampleHandler;
 use Mezzio\Application;
 use ResponsiveSk\Slim4Paths\Paths;
@@ -23,7 +27,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates' => $this->getTemplates(),
+            'templates'    => $this->getTemplates(),
         ];
     }
 
@@ -41,12 +45,12 @@ class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
-            'factories' => [
-                GetIndexViewHandler::class => GetIndexViewHandlerFactory::class,
-                PathsExampleHandler::class => PathsExampleHandlerFactory::class,
-                Paths::class => PathsFactory::class,
-                \Light\App\Handler\BootstrapDemoHandler::class => \Light\App\Factory\BootstrapDemoHandlerFactory::class,
-                \Light\App\Handler\MainDemoHandler::class => \Light\App\Factory\MainDemoHandlerFactory::class,
+            'factories'  => [
+                GetIndexViewHandler::class  => GetIndexViewHandlerFactory::class,
+                PathsExampleHandler::class  => PathsExampleHandlerFactory::class,
+                Paths::class                => PathsFactory::class,
+                BootstrapDemoHandler::class => BootstrapDemoHandlerFactory::class,
+                MainDemoHandler::class      => MainDemoHandlerFactory::class,
             ],
         ];
     }

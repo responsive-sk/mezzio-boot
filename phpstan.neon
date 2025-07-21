@@ -3,11 +3,11 @@ includes:
 parameters:
     level: max
     paths:
-        - bin
         - config
         - src
         - test
     excludePaths:
+        - bin
         - src/Templates/bootstrap/node_modules
         - src/Templates/main/node_modules
     treatPhpDocTypesAsCertain: false

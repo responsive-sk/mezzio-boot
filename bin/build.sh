@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# DotKernel Light - Build Script Wrapper
+# Mezzio Boot - Build Script Wrapper
 # Compatible with slim4-paths v6.0
 
 set -e
@@ -14,7 +14,7 @@ NC='\033[0m'
 
 # Function to display usage
 show_usage() {
-    echo "DotKernel Light Build Script"
+    echo "Mezzio Boot Build Script"
     echo "Compatible with slim4-paths v6.0"
     echo ""
     echo "Usage: $0 [BUILD_TARGET]"
@@ -115,16 +115,16 @@ main() {
             ;;
     esac
     
-    echo -e "${BLUE}DotKernel Light Build Script${NC}"
+    echo -e "${BLUE}Mezzio Boot Build Script${NC}"
     echo -e "${BLUE}Compatible with slim4-paths v6.0${NC}"
     echo ""
     
     check_requirements
     show_build_info "$build_target"
     
-    # Run the PHP build script
-    echo -e "${BLUE}Starting build process...${NC}"
-    php bin/build-production.php "$build_target"
+    # Run the secure PHP build script
+    echo -e "${BLUE}Starting secure build process...${NC}"
+    php bin/build-production-secure.php "$build_target"
     
     echo ""
     echo -e "${GREEN}Build completed successfully!${NC}"

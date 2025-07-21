@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Light\App\Factory;
 
-use function assert;
-
 use Light\App\Handler\PathsExampleHandler;
 use Psr\Container\ContainerInterface;
 use ResponsiveSk\Slim4Paths\Paths;
+
+use function assert;
 
 class PathsExampleHandlerFactory
 {

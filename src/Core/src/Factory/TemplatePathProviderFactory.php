@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Light\Core\Factory;
 
-use function assert;
-use function is_array;
-
 use Light\Core\Service\ConfigBasedTemplatePathProvider;
 use Light\Core\Service\TemplatePathProviderInterface;
 use Psr\Container\ContainerInterface;
 use ResponsiveSk\Slim4Paths\Paths;
+
+use function assert;
+use function is_array;
 
 /**
  * Factory for TemplatePathProvider service.

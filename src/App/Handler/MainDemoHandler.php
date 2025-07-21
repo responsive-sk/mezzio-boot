@@ -21,19 +21,19 @@ class MainDemoHandler implements RequestHandlerInterface
     {
         // Jednoduché theme info bez zložitého AssetHelper
         $themeInfo = [
-            'name' => 'TailwindCSS + Alpine.js',
-            'version' => '3.3.0',
+            'name'        => 'TailwindCSS + Alpine.js',
+            'version'     => '3.3.0',
             'description' => 'Modern utility-first CSS framework with reactive components',
         ];
 
         // Vite compiled assets (no hashes for easier maintenance)
         $cssUrl = '/themes/main/assets/main.css';
-        $jsUrl = '/themes/main/assets/main.js';
+        $jsUrl  = '/themes/main/assets/main.js';
 
         $html = $this->template->render('app::main-demo', [
             'themeInfo' => $themeInfo,
-            'cssUrl' => $cssUrl,
-            'jsUrl' => $jsUrl,
+            'cssUrl'    => $cssUrl,
+            'jsUrl'     => $jsUrl,
         ]);
 
         return new HtmlResponse($html);

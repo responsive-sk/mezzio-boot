@@ -21,7 +21,7 @@ class ConfigProviderTest extends TestCase
         parent::setUp();
 
         /** @var array<string, mixed> $config */
-        $config = (new ConfigProvider())();
+        $config       = (new ConfigProvider())();
         $this->config = $config;
     }
 

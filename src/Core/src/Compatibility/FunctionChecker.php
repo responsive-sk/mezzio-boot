@@ -37,9 +37,9 @@ class FunctionChecker
             return;
         }
 
-        $disabled = ini_get('disable_functions');
+        $disabled                = ini_get('disable_functions');
         self::$disabledFunctions = $disabled ? explode(',', $disabled) : [];
-        self::$initialized = true;
+        self::$initialized       = true;
     }
 
     /**
@@ -53,7 +53,7 @@ class FunctionChecker
         self::init();
 
         return function_exists($function) &&
-               !in_array($function, self::$disabledFunctions, true);
+               ! in_array($function, self::$disabledFunctions, true);
     }
 
     /**

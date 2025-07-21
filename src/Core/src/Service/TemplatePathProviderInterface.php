@@ -29,7 +29,7 @@ interface TemplatePathProviderInterface
      *
      * @param string $namespace Template namespace (e.g., 'app', 'error', 'layout')
      * @return string Absolute path to template directory
-     * @throws InvalidArgumentException If namespace is not configured
+     * @throws InvalidArgumentException If namespace is not configured.
      */
     public function getTemplatePathForNamespace(string $namespace): string;
 

@@ -23,10 +23,10 @@ use Dot\Log\Logger;
 
 return [
     'dot-errorhandler' => [
-        'loggerEnabled' => true,
-        'logger' => 'dot-log.default_logger',
+        'loggerEnabled'           => true,
+        'logger'                  => 'dot-log.default_logger',
         ExtraProvider::CONFIG_KEY => [
-            CookieProvider::class => [
+            CookieProvider::class  => [
                 'enabled' => false,
 //                'processor' => [
 //                    'class'               => \Dot\ErrorHandler\Extra\Processor\CookieProcessor::class,
@@ -36,7 +36,7 @@ return [
 //                    ],
 //                ],
             ],
-            HeaderProvider::class => [
+            HeaderProvider::class  => [
                 'enabled' => false,
 //                'processor' => [
 //                    'class'               => \Dot\ErrorHandler\Extra\Processor\HeaderProcessor::class,
@@ -54,7 +54,7 @@ return [
 //                    ],
 //                ],
             ],
-            ServerProvider::class => [
+            ServerProvider::class  => [
                 'enabled' => true,
 //                'processor' => [
 //                    'class'               => \Dot\ErrorHandler\Extra\Processor\ServerProcessor::class,
@@ -72,7 +72,7 @@ return [
 //                    'sensitiveParameters' => [],
 //                ],
             ],
-            TraceProvider::class => [
+            TraceProvider::class   => [
                 'enabled' => true,
 //                'processor' => [
 //                    'class'               => \Dot\ErrorHandler\Extra\Processor\TraceProcessor::class,
@@ -82,22 +82,22 @@ return [
             ],
         ],
     ],
-    'dot_log' => [
+    'dot_log'          => [
         'loggers' => [
             'default_logger' => [
                 'writers' => [
                     'FileWriter' => [
-                        'name' => 'stream',
-                        'level' => Logger::ALERT,
+                        'name'    => 'stream',
+                        'level'   => Logger::ALERT,
                         'options' => [
                             'stream' => __DIR__ . '/../../var/logs/error-log-{Y}-{m}-{d}.log',
                             // explicitly log all messages
-                            'filters' => [
+                            'filters'   => [
                                 'allMessages' => [
-                                    'name' => 'level',
+                                    'name'    => 'level',
                                     'options' => [
                                         'operator' => '>=',
-                                        'level' => Logger::EMERG,
+                                        'level'    => Logger::EMERG,
                                     ],
                                 ],
                             ],

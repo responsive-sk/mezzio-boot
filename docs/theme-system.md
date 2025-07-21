@@ -1,6 +1,6 @@
 # Theme System
 
-DotKernel Light includes a modern theme system with Bootstrap 5.3 and TailwindCSS + Alpine.js themes, built with Vite for optimal performance.
+Mezzio Boot includes a modern theme system with Bootstrap 5.3 and TailwindCSS + Alpine.js themes, built with Vite for optimal performance.
 
 ## Overview
 

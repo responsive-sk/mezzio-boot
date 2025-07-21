@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Light\Core\Service;
 
-use function array_key_exists;
-use function array_keys;
-
 use InvalidArgumentException;
-
-use function is_array;
-
 use ResponsiveSk\Slim4Paths\Paths;
 
+use function array_key_exists;
+use function array_keys;
+use function is_array;
 use function sprintf;
 
 /**
@@ -52,11 +49,11 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
      *
      * @param string $namespace Template namespace
      * @return string Absolute path to template directory
-     * @throws InvalidArgumentException If namespace is not configured
+     * @throws InvalidArgumentException If namespace is not configured.
      */
     public function getTemplatePathForNamespace(string $namespace): string
     {
-        if (!$this->hasTemplateNamespace($namespace)) {
+        if (! $this->hasTemplateNamespace($namespace)) {
             throw new InvalidArgumentException(
                 sprintf('Template namespace "%s" is not configured', $namespace)
             );
@@ -91,11 +88,11 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
      */
     private function initializeTemplatePaths(): void
     {
-        if (!isset($this->config['paths']) || !is_array($this->config['paths'])) {
+        if (! isset($this->config['paths']) || ! is_array($this->config['paths'])) {
             return;
         }
 
-        if (!isset($this->config['paths']['templates']) || !is_array($this->config['paths']['templates'])) {
+        if (! isset($this->config['paths']['templates']) || ! is_array($this->config['paths']['templates'])) {
             return;
         }
 
@@ -104,7 +101,7 @@ class ConfigBasedTemplatePathProvider implements TemplatePathProviderInterface
 
         foreach ($templateConfig as $namespace => $relativePath) {
             // Use Paths service to get absolute path
-            $absolutePath = $this->paths->getPath($relativePath, '');
+            $absolutePath                    = $this->paths->getPath($relativePath, '');
             $this->templatePaths[$namespace] = $absolutePath;
         }
     }
