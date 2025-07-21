@@ -35,8 +35,10 @@ class RoutesDelegator
         assert(is_array($routes));
 
         foreach ($routes as $prefix => $moduleRoutes) {
-            assert(is_string($prefix));
-            assert(is_array($moduleRoutes));
+            // Skip non-string prefixes (e.g., numeric keys from other route configurations)
+            if (!is_string($prefix) || !is_array($moduleRoutes)) {
+                continue;
+            }
 
             foreach ($moduleRoutes as $routeUri => $templateName) {
                 assert(is_string($routeUri));
