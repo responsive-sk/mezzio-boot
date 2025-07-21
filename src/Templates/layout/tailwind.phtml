@@ -30,55 +30,88 @@
 
 <body class="h-full bg-gray-50 <?= $body_class ?? '' ?>">
     <div class="min-h-full">
-        <!-- Navigation -->
-        <nav class="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
+        <!-- True Roave-inspired Navigation -->
+        <nav class="bg-white fixed w-full top-0 z-50" x-data="{ mobileMenuOpen: false }">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
                     <div class="flex items-center">
-                        <a href="<?= $url('app::index') ?>" class="flex-shrink-0">
-                            <img class="h-8 w-auto" src="/images/app/logo.svg" alt="responsive.sk"/>
+                        <a href="<?= $url('app::index') ?>" class="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors duration-200">
+                            responsive.sk
                         </a>
                     </div>
 
-                    <!-- Desktop Navigation -->
-                    <div class="hidden md:flex items-center space-x-8">
-                        <a href="<?= $url('app::index') ?>" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
-                            Home
-                        </a>
-                        <a href="<?= $url('app::bootstrap-demo') ?>" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
-                            Bootstrap Demo
-                        </a>
-                        <a href="<?= $url('app::main-demo') ?>" class="text-blue-600 px-3 py-2 text-sm font-medium">
-                            TailwindCSS Demo
-                        </a>
-                        
-                        <!-- Pages Dropdown -->
-                        <div class="relative" x-data="{ open: false }">
-                            <button @click="open = !open" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors">
-                                Pages
-                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                                <a href="<?= $url('page::about') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
-                                <a href="<?= $url('page::who-we-are') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Who We Are</a>
-                            </div>
-                        </div>
-                        
-                        <a href="https://github.com/dotkernel/light/" target="_blank" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
-                            GitHub
+                    <!-- Desktop: Simple Contact Button (like Roave's "Speak to us") -->
+                    <div class="hidden md:flex items-center">
+                        <a href="mailto:hello@responsive.sk"
+                           class="inline-flex items-center px-6 py-2 bg-black hover:bg-gray-800 text-white font-medium text-sm rounded-full transition-all duration-200 hover:shadow-lg">
+                            Speak to us
                         </a>
                     </div>
 
-                    <!-- Mobile menu button -->
+                    <!-- Mobile: Menu button -->
                     <div class="md:hidden flex items-center">
-                        <button x-data="{ open: false }" @click="open = !open" class="text-gray-900 hover:text-blue-600 p-2">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen"
+                                class="p-2 text-gray-900 hover:text-gray-700 transition-colors duration-200">
+                            <span class="sr-only">Menu</span>
                             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Menu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu (Roave-style) -->
+            <div x-show="mobileMenuOpen"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="md:hidden fixed inset-0 bg-white z-40"
+                 @click.away="mobileMenuOpen = false">
+
+                <div class="flex flex-col h-full">
+                    <!-- Mobile menu header -->
+                    <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                        <a href="<?= $url('app::index') ?>" class="text-xl font-bold text-gray-900">
+                            responsive.sk
+                        </a>
+                        <button @click="mobileMenuOpen = false" class="p-2 text-gray-900">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
+                    </div>
+
+                    <!-- Mobile menu items -->
+                    <div class="flex-1 px-6 py-8">
+                        <nav class="space-y-2">
+                            <a href="<?= $url('app::index') ?>"
+                               class="block py-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                Home
+                            </a>
+                            <a href="<?= $url('app::bootstrap-demo') ?>"
+                               class="block py-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                What we offer
+                            </a>
+                            <a href="<?= $url('page::about') ?>"
+                               class="block py-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                Community
+                            </a>
+                            <a href="<?= $url('app::main-demo') ?>"
+                               class="block py-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                Work
+                            </a>
+                            <a href="mailto:hello@responsive.sk"
+                               class="block py-3 text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                Contact us
+                            </a>
+                        </nav>
                     </div>
                 </div>
             </div>
