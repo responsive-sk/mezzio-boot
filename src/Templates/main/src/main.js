@@ -20,6 +20,8 @@ window.themeAssets = {
 
 // Initialize Alpine.js
 window.Alpine = Alpine;
+
+// Start Alpine immediately since script is deferred
 Alpine.start();
 
 console.log('Main theme (TailwindCSS + Alpine.js) loaded');
